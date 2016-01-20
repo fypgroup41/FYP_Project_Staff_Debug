@@ -33,6 +33,10 @@
     margin-bottom:2%;
     transition:opacity 1s;
     -webkit-transition:opacity 1s;
+    transform: translate(-50%, -50%);
+    top:50%;
+    left:50%;
+    position:absolute;
 }
 
 
@@ -46,12 +50,12 @@
 }
 
 #loginForm>form{
-    
+
     padding:6% 4%;
 }
 
 #loginForm>input[type="text"]+input[type="password"]{
-    
+
     background:#fff;
     margin-bottom:1%;
     border:1px solid #ccc;

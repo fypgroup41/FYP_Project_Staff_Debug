@@ -22,46 +22,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <script>
             $(document).ready(function () {
-                $("#login").click(function () {
-                    $("#closeButton").css("visibility", "visible");
-                    $("#indexLog").css("visibility", "visible");
-                    $("#closeButton").load("login.jsp");
-
-                });
-                $("#register").click(function () {
-                    $("#closeButton").css("visibility", "visible");
-                    $("#indexLog").css("visibility", "visible");
-                });
-                $("#close").click(function () {
-                    $("#closeButton").css("visibility", "hidden");
-                    $("#indexLog").css("visibility", "hidden");
-                });
-                $("#register").click(function () {
-                    $("#contentPage").load("Generaluser_regform.jsp");
-                });
-
-                $("#activities").click(function () {
-                    $("#contentPage").load("activities.jsp");
-                });
-
-
+                
+                $("#AAA").load("activities.jsp");
             });
         </script>
-        <%--    <script type="text/javascript">
-                function enableOverLay() {
-                    var target = document.getElementById("indexLog");
-                    target.style.visibility = "visible";
-                    var target2 = document.getElementById("closeButton");
-                    target2.style.visibility = "visible";
-                }
 
-            function disableOverLat() {
-                var target = document.getElementById("indexLog");
-                target.style.visibility = "hidden";
-                var target2 = document.getElementById("closeButton");
-                target2.style.visibility = "hidden";
-            }
-        </script>--%>
     </head>
     <body >
 
@@ -81,6 +46,8 @@
                 }
             }
         %>
+        
+        
         <div class="header"  style="background-color: green">
             <div id="Left" style="display:initine">
                 <img src="img/logo.jpg" style="width:100px;height:100px;cursor: pointer"  onclick="window.location.href = '<%=getServletContext().getContextPath() + "/"%>main.jsp'">
@@ -125,54 +92,12 @@
 
 
         </div>
-
-        <div class="row" style="height:100%">
-
-            <div class="col-1 menu">
-                <ul>
-                    <li id="activities" style="cursor: pointer"><center>Activities</center></li>
-                    <li id="news"><center>News</center></li>
-                    <li id="wall"><center>Sharing Wall</center></li>
-                </ul>
+            <div id="AAA">
+                
+                
+                
             </div>
-
-            <div class="col-9" id="contentPage" style="background-color: Cornsilk  ;height:100%;overflow: scroll">
-                <div class="content">
-
-                    <h1>Main Content</h1>
-                    <p>Maybe set iframe to change content</p>
-
-
-                </div>
-            </div>
-            <div class="col-2 right">
-                <div class="aside">
-                    <center>Sharing on Swimming Lessons (2015-11-12)</center>
-                    <center> <i class="fa fa-camera-retro fa-5x"></i></center>
-                    <div>Jade Art hold a Swimming Lesson on 2015-11-15.Most of the participats learn how to swimming..........<a href="">Click here</a> </div>
-
-
-                    <hr>
-                    <center>Sharing on Swimming Lessons (2015-11-12)</center>
-                    <center> <i class="fa fa-camera-retro fa-5x"></i></center>
-                    <div>Jade Art hold a Swimming Lesson on 2015-11-15.Most of the participats learn how to swimming..........<a href="">Click here</a> </div>
-
-                    <hr>
-                    <center>Sharing on Swimming Lessons (2015-11-12)</center>
-                    <center> <i class="fa fa-camera-retro fa-5x"></i></center>
-                    <div>Jade Art hold a Swimming Lesson on 2015-11-15.Most of the participats learn how to swimming..........<a href="">Click here</a> </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div id="footer" >
-        </div>
-        <div id="closeButton">
-
-        </div>
-
-
+        
         <jsp:include page="/footer.jsp"/>
     </body>
 </html>

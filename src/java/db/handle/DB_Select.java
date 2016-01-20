@@ -193,14 +193,14 @@ public class DB_Select {
 
     }
 
-    public boolean isValidUser(String username, String password) {
+    public boolean isValidStaff(String username, String password) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         String[][] temp = null;
         boolean isValid = false;
         try {
             cnnct = getConnection();
-            String preQueryStatement = "SELECT * FROM USER WHERE USERNAME =  ? and  PASSWORD =  ? ";
+            String preQueryStatement = "SELECT * FROM USER WHERE USERNAME =  ? and  PASSWORD =  ?  AND STAFFID IS NOT NULL";
             pStmnt = cnnct.prepareStatement(preQueryStatement);
             pStmnt.setString(1, username);
             pStmnt.setString(2, password);
@@ -445,5 +445,9 @@ public class DB_Select {
         }
         return list;
     }
+    
+    
+    
+    
 
 }

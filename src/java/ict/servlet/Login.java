@@ -88,7 +88,7 @@ public class Login extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String targetURL;
-            boolean isValid = db.isValidUser(username, password);
+            boolean isValid = db.isValidStaff(username, password);
             if (isValid) {
                 HttpSession session;
                 session = request.getSession(true);
@@ -96,22 +96,15 @@ public class Login extends HttpServlet {
 
                 if (session.getAttribute("userInfo") != null) {
                     UserBean user = (UserBean) session.getAttribute("userInfo");
-                    if (user.getMemberID() != null) {
-                        session.setAttribute("userTypeLevel", "member");
-                        session.setAttribute("userName", username);
-                    }
-                    if (user.getStaffID() != null) {
-                        session.setAttribute("userTypeLevel", "staff");
-                        session.setAttribute("userTypeID", user.getStaffID());
-                        session.setAttribute("userName", username);
-                    }
+                    session.setAttribute("userTypeLevel", "staff");
+                    session.setAttribute("userName", user.getLastName_eng() + " " + user.getFirstName_eng());
                 }
 
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/main.jsp");
                 rd.forward(request, response);
             } else {
-                 RequestDispatcher rd;
+                RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/errorLogin.jsp");
                 rd.forward(request, response);
 
