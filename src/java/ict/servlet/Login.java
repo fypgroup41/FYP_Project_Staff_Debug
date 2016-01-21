@@ -18,7 +18,7 @@ import javax.servlet.http.*;
  */
 public class Login extends HttpServlet {
 
-    private DB_Select db;
+    private DB_Select db_select;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class Login extends HttpServlet {
         String dbUser = this.getServletContext().getInitParameter("dbUsername");
         String dbPassword = this.getServletContext().getInitParameter("dbPassword");
         String dbUrl = this.getServletContext().getInitParameter("dbUrl");
-        db = new DB_Select(dbUrl, dbUser, dbPassword);
+        db_select = new DB_Select(dbUrl, dbUser, dbPassword);
         try {
             PrintWriter out = response.getWriter();
             String action = request.getParameter("action");
@@ -88,18 +88,17 @@ public class Login extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String targetURL;
-            boolean isValid = db.isValidStaff(username, password);
+            boolean isValid = db_select.isValidStaff(username, password);
             if (isValid) {
                 HttpSession session;
                 session = request.getSession(true);
-                session.setAttribute("userInfo", db.queryUserByUsername(username));
-
+                session.setAttribute("userInfo", db_select.queryUserByUsername(username));
                 if (session.getAttribute("userInfo") != null) {
                     UserBean user = (UserBean) session.getAttribute("userInfo");
-                    session.setAttribute("userTypeLevel", "staff");
-                    session.setAttribute("userName", user.getLastName_eng() + " " + user.getFirstName_eng());
+                    session.setAttribute("userTypeLevel", "Staff");
+                    session.setAttribute("staffInfo", db_select.queryStaffByStaffID(user.getStaffID()));
+                    session.setAttribute("displayName", user.getLastName_eng() + " " + user.getFirstName_eng());
                 }
-
                 RequestDispatcher rd;
                 rd = getServletContext().getRequestDispatcher("/main.jsp");
                 rd.forward(request, response);

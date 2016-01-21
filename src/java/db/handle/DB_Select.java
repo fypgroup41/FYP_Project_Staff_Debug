@@ -9,6 +9,7 @@ import db.bean.ActivitiesBean;
 import db.bean.ActivitiesRecordBean;
 import db.bean.ActivityBudgetBean;
 import db.bean.AdminBean;
+import db.bean.StaffBean;
 import db.bean.UserBean;
 
 import java.io.IOException;
@@ -254,6 +255,37 @@ public class DB_Select {
         return user;
     }
 
+    public StaffBean queryStaffByStaffID(String StaffID) {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        ArrayList list = new ArrayList();
+        StaffBean user = null;
+        try {
+
+            ResultSet rs = null;
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT* FROM STAFF WHERE STAFFID=?";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+
+            pStmnt.setString(1, StaffID);
+            rs = pStmnt.executeQuery();
+            while (rs.next()) {
+                user = new StaffBean(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+            }
+            pStmnt.close();
+            cnnct.close();
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return user;
+    }
+
     public String getAvailMemberID() {
         Connection cnnct = null;
         boolean isSuccess = false;
@@ -445,9 +477,5 @@ public class DB_Select {
         }
         return list;
     }
-    
-    
-    
-    
 
 }
