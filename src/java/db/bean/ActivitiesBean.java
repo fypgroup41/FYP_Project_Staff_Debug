@@ -17,6 +17,9 @@ public class ActivitiesBean {
     String sqID;
     String description;
 
+    public ActivitiesBean() {
+    }
+
     public ActivitiesBean(String activitiesID, String name, String districtNo, int quota, int remain, int targetAgeMax, int targetAgeMin, String deadline, String venue, String date, String tag, String staffID, String sqID, String description) {
         this.activitiesID = activitiesID;
         this.name = name;

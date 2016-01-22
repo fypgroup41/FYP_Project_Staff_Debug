@@ -45,4 +45,12 @@
         <servlet-name>activity_json</servlet-name>
         <url-pattern>/activity_json</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>updateServlet</servlet-name>
+        <servlet-class>ict.servlet.UpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updateServlet</servlet-name>
+        <url-pattern>/updateServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

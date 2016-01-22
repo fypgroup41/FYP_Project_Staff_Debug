@@ -38,7 +38,7 @@
             UserBean user = (UserBean) session.getAttribute("userInfo");
             //ArrayList aryData = db_select.queryActivitiesBySql("SELECT * FROM activities where activitiesID=\"" + request.getParameter("actID") + "\"");
 
-            ArrayList aryData = db_select.queryActivitiesBySql("SELECT * FROM activities where activitiesID=\"" + "6" + "\"");
+            ArrayList aryData = db_select.queryListAll("activities", "where activitiesID=\"" + request.getParameter("actID") + "\"");
             for (int i = 0; i < aryData.size(); i++) {
                 ActivitiesBean act = (ActivitiesBean) aryData.get(i);
         %>
@@ -52,8 +52,11 @@
         <span style="text-align:center"><h1><%= act.getName()%></h1></span>
         <br>
         <br>
-        <form method="post" action="">
+        <form method="post" action="updateServlet">
+            <input type="hidden" name="table_type" value="activities") >
+            <input type="hidden" name="item_id" value="<%=act.getActivitiesID()%>">
             <table  align="center" >
+
                 <tr><td>ActivitiesID</td><td><%=act.getActivitiesID()%></td></tr>
                 <tr><td>Name</td><td><input type="text" name="activitiesID" value="<%=act.getName()%>" size="35"></td></tr>
 
@@ -70,8 +73,8 @@
 
                             %>
                         </select></td></tr>
-                <tr><td>quota</td><td><input type="text" name="activitiesID" value="<%=act.getQuota()%>" size="35"></td></tr>
-                <tr><td>remain</td><td><input type="text" name="activitiesID" value="<%=act.getRemain()%>" size="35"></td></tr>
+                <tr><td>quota</td><td><input type="text" name="activitiesID" value="<%=act.getQuota()%>" size="35" min="0"></td></tr>
+
                 <tr><td>targetAgeMax</td><td>
                         <input type="range" style="width:auto;display: initial;" id="targetAgeMax"  value="<%=act.getTargetAgeMax()%>"  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show"><%=act.getTargetAgeMax()%></span>
                         <script type="text/javascript">

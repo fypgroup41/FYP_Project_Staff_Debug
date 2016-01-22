@@ -9,7 +9,7 @@ package db.bean;
  *
  * @author test
  */
-public class SurveyAnswer {
+public class SurveyAnswerBean {
 
     String saID;
     String answer;
@@ -17,7 +17,7 @@ public class SurveyAnswer {
     String memberID;
     String userID;
 
-    public SurveyAnswer(String saID, String answer, String sqID, String memberID, String userID) {
+    public SurveyAnswerBean(String saID, String answer, String sqID, String memberID, String userID) {
         this.saID = saID;
         this.answer = answer;
         this.sqID = sqID;
