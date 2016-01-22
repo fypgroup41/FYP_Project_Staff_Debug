@@ -18,11 +18,12 @@
                 $("#activities").addClass("active");
                 $.ajax({
                     type: "POST",
-                    data: "id=<%="3"%>",
+                    data: "id=<%="2"%>",
                     url: "activity_json",
                     success: function (data) {
                         var obj = jQuery.parseJSON(data);
                         var dataSet = obj;
+
                         var table = $('#example').DataTable({
                             data: dataSet,
                             rowId: "Activity ID",
@@ -42,14 +43,13 @@
                                 {title: "date"},
                                 {title: "tag"},
                                 {title: "staffID"},
-                                {title: "sqID"},
                                 {title: "Description"}
                             ]
                         });
                         $('#example tbody').on('click', 'tr', function () {
                             var rowData = table.row(this).data();
                             //alert(rowData[0]);
-                            $(location).attr('href', '<%=getServletContext().getContextPath() + "/"%>activitiesDetail.jsp?actID='+rowData[0]);
+                            $(location).attr('href', '<%=getServletContext().getContextPath() + "/"%>activitiesDetail.jsp?actID=' + rowData[0]);
                             // ... do something with `rowData`
                         });
                     },

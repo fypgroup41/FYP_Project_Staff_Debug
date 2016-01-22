@@ -58,9 +58,9 @@
             <table  align="center" >
 
                 <tr><td>ActivitiesID</td><td><%=act.getActivitiesID()%></td></tr>
-                <tr><td>Name</td><td><input type="text" name="activitiesID" value="<%=act.getName()%>" size="35"></td></tr>
+                <tr><td>Name</td><td><input type="text" name="name" value="<%=act.getName()%>" size="35"></td></tr>
 
-                <tr><td>districtNo</td><td>       <select>
+                <tr><td>districtNo</td><td>       <select name="districtNo">
                             <%          for (int j = 0; j < district_data.size(); j++) {
                                     DistrictBean district = (DistrictBean) district_data.get(j);
                             %>
@@ -73,10 +73,10 @@
 
                             %>
                         </select></td></tr>
-                <tr><td>quota</td><td><input type="text" name="activitiesID" value="<%=act.getQuota()%>" size="35" min="0"></td></tr>
+                <tr><td>quota</td><td><input type="text" name="quota" value="<%=act.getQuota()%>" size="35" min="0"></td></tr>
 
                 <tr><td>targetAgeMax</td><td>
-                        <input type="range" style="width:auto;display: initial;" id="targetAgeMax"  value="<%=act.getTargetAgeMax()%>"  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show"><%=act.getTargetAgeMax()%></span>
+                        <input type="range" style="width:auto;display: initial;" name="targetAgeMax"  value="<%=act.getTargetAgeMax()%>"  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show"><%=act.getTargetAgeMax()%></span>
                         <script type="text/javascript">
                             function targetAgeMax_show(newValue)
                             {
@@ -84,7 +84,7 @@
                             }
                         </script>
                     </td></tr>
-                <tr><td>targetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="activitiesID" value="<%=act.getTargetAgeMin()%>" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show"><%=act.getTargetAgeMin()%></span>
+                <tr><td>targetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="targetAgeMin" value="<%=act.getTargetAgeMin()%>" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show"><%=act.getTargetAgeMin()%></span>
                         <script type="text/javascript">
                             function targetAgeMin_show(newValue)
                             {
@@ -93,21 +93,24 @@
                         </script>
 
                     </td></tr>
-                <tr><td>deadline</td><td><input type="text" name="activitiesID" value="<%=act.getDeadline()%>" size="35"></td></tr>
-                <tr><td>venue</td><td><input type="text" name="activitiesID" value="<%=act.getVenue()%>" size="35"></td></tr>
-                <tr><td>date</td><td><input type="text" name="activitiesID" value="<%=act.getDate()%>" size="35"></td></tr>
-                <tr><td>tag</td><td><input type="text" name="activitiesID" value="<%=act.getTag()%>" size="35"></td></tr>
-                <tr><td>description</td><td><textarea name="activitiesID" ><%=act.getDescription()%></textarea></td></tr>
+                <tr><td>deadline</td><td><input type="text" name="deadline" value="<%=act.getDeadline()%>" size="35"></td></tr>
+                <tr><td>venue</td><td><input type="text" name="venue" value="<%=act.getVenue()%>" size="35"></td></tr>
+                <tr><td>date</td><td><input type="text" name="date" value="<%=act.getDate()%>" size="35"></td></tr>
+                <tr><td>tag</td><td><input type="text" name="tag" value="<%=act.getTag()%>" size="35"></td></tr>
+                <tr><td>description</td><td><textarea name="description" ><%=act.getDescription()%></textarea></td></tr>
                 <tr><td>       <br><br>    <input type="submit" value="Update"></td><td></td></tr>
 
 
 
             </table>
-
+ 
 
             <br>
 
 
+
+            <input type="button" onClick="alert(\"AAA\")">
+            <a href="deleteServlet?table_type=activities&item_id=<%=act.getActivitiesID()%>">Delete Link</a>
 
 
 
@@ -116,13 +119,10 @@
             %>
 
 
+        </form>
 
 
 
 
-
-
-
-
-            </body>
-            </html>
+    </body>
+</html>

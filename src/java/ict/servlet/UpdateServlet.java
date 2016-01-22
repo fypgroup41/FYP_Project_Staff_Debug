@@ -5,21 +5,17 @@
  */
 package ict.servlet;
 
-import db.bean.ActivitiesBean;
 import db.handle.DB_Select;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
 import javax.servlet.*;
-
 import javax.servlet.http.*;
-import net.sf.json.*;
 
 public class UpdateServlet extends HttpServlet {
 
     private DB_Select db_select;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String dbUser = this.getServletContext().getInitParameter("dbUsername");
         String dbPassword = this.getServletContext().getInitParameter("dbPassword");
         String dbUrl = this.getServletContext().getInitParameter("dbUrl");
@@ -27,8 +23,42 @@ public class UpdateServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
 
-            boolean a = db_select.editActivitiesRecord(null);
-            out.println("AAA");
+            String table_type = null;
+            table_type = request.getParameter("table_type");
+
+            if (table_type.equals("activities")) {
+                String item_id = null;
+                String name = null;
+                String districtNo = null;
+                String quota = null;
+                String targetAgeMax = null;
+                String targetAgeMin = null;
+                String deadline = null;
+                String venue = null;
+                String date = null;
+                String tag = null;
+                String description = null;
+
+                item_id = request.getParameter("item_id");
+                name = request.getParameter("name");
+                districtNo = request.getParameter("districtNo");
+                quota = request.getParameter("quota");
+                targetAgeMax = request.getParameter("targetAgeMax");
+                targetAgeMin = request.getParameter("targetAgeMin");
+                deadline = request.getParameter("deadline");
+                venue = request.getParameter("venue");
+                date = request.getParameter("date");
+                tag = request.getParameter("tag");
+                description = request.getParameter("description");
+                String sql = " UPDATE ACTIVITIES SET name ='" + name + "'  ,districtNo='" + districtNo + "'  , quota='" + quota + "'  ,targetAgeMax=" + targetAgeMax + "  ,targetAgeMin=" + targetAgeMin + "  ,deadline='" + deadline + "'  ,venue='" + venue + "'  ,date='" + date + "'  ,tag='" + tag + "'  ,description='" + description + "'  WHERE activitiesID='" + item_id + "'";
+                boolean isSuccess = db_select.editRecordBySql(sql);
+
+                request.setAttribute("status", "Update Success");
+                RequestDispatcher rd
+                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                rd.forward(request, response);
+
+            }
 
         } catch (Exception ex) {
 

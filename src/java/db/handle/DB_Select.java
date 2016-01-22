@@ -79,7 +79,7 @@ public class DB_Select {
         if (bean.equals("activities")) {
             ActivitiesBean activities;
             while (rs.next()) {
-                activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline"), rs.getString("venue"), rs.getString("date"), rs.getString("tag"), rs.getString("staffID"), rs.getString("sqID"), rs.getString("description"));
+                activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline"), rs.getString("venue"), rs.getString("date"), rs.getString("tag"), rs.getString("staffID"), rs.getString("description"));
                 list.add(activities);
             }
         }
@@ -438,7 +438,7 @@ public class DB_Select {
 
             rs = pStmnt.executeQuery();
             while (rs.next()) {
-                activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline"), rs.getString("venue"), rs.getString("date").substring(0, rs.getString("date").length() - 2), rs.getString("tag"), rs.getString("staffID"), rs.getString("sqID"), rs.getString("description"));
+                activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline"), rs.getString("venue"), rs.getString("date").substring(0, rs.getString("date").length() - 2), rs.getString("tag"), rs.getString("staffID"), rs.getString("description"));
                 list.add(activities);
             }
             pStmnt.close();
@@ -474,7 +474,7 @@ public class DB_Select {
                 pStmnt = cnnct.prepareStatement(preQueryStatement);
                 rs = pStmnt.executeQuery();
                 while (rs.next()) {
-                    ActivitiesBean activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline"), rs.getString("venue"), rs.getString("date").substring(0, rs.getString("date").length() - 2), rs.getString("tag"), rs.getString("staffID"), rs.getString("sqID"), rs.getString("description"));
+                    ActivitiesBean activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline"), rs.getString("venue"), rs.getString("date").substring(0, rs.getString("date").length() - 2), rs.getString("tag"), rs.getString("staffID"), rs.getString("description"));
                     list.add(activities);
                 }
                 pStmnt.close();
@@ -603,7 +603,7 @@ public class DB_Select {
 
             }
             if (table.equals("staff")) {
-                String preQueryStatement = "SELECT* FROM ACTIVITIES" + condition;
+                String preQueryStatement = "SELECT* FROM Staff" + condition;
                 pStmnt = cnnct.prepareStatement(preQueryStatement);
                 rs = pStmnt.executeQuery();
                 while (rs.next()) {
@@ -666,17 +666,19 @@ public class DB_Select {
         return list;
     }
 
-    public boolean editActivitiesRecord(ActivitiesBean activities) throws SQLException, IOException {
+    public boolean editRecordBySql(String sql) throws SQLException, IOException {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
         boolean isSuccess = false;
         cnnct = getConnection();
         try {
-
             Statement stmt = cnnct.createStatement();
-            String update = "UPDATE ACTIVITIES SET name=\"AAAAAdzdvdzfsABBBBBBBB\"  WHERE activitiesID=\"2\"";
+            String update = sql;
             stmt.executeUpdate(update);
-
+            int i = stmt.executeUpdate(update);
+            if (i >= 1) {
+                return true;
+            }
             pStmnt.close();
             cnnct.close();
 
@@ -686,7 +688,32 @@ public class DB_Select {
                 ex = ex.getNextException();
             }
         }
-        return isSuccess;
+        return false;
+    }
+
+    public boolean delRecordBySql(String sql) throws SQLException, IOException {
+        Connection cnnct = null;
+
+        boolean isSuccess = false;
+        cnnct = getConnection();
+        try {
+            Statement stmt = cnnct.createStatement();
+            String update = sql;
+            stmt.executeUpdate(update);
+            int i = stmt.executeUpdate(update);
+            if (i >= 1) {
+                return true;
+            }
+
+            cnnct.close();
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        }
+        return false;
     }
 
     /*public CategoryBean queryCategoryByID(String catId) {

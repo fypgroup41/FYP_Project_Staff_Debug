@@ -20,7 +20,6 @@ public class NewClass {
         SimpleDateFormat formatter = null;
         java.util.Date utilDate = null;
 
-
         try {
             formatter = new SimpleDateFormat("yyyy-MM-dd");
             utilDate = formatter.parse("1995-10-10");
@@ -29,7 +28,6 @@ public class NewClass {
             custom_date.setTime(utilDate);
             int year = date.get(Calendar.YEAR) - custom_date.get(Calendar.YEAR);  // 2012
             System.out.println(year + "");
-
         } catch (Exception ex) {
         }
 

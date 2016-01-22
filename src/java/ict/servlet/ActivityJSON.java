@@ -45,8 +45,8 @@ public class ActivityJSON extends HttpServlet {
                 jsonArray.add(9, act.getDate());
                 jsonArray.add(10, act.getTag());
                 jsonArray.add(11, act.getStaffID());
-                jsonArray.add(12, act.getSqID());
-                jsonArray.add(13, act.getDescription());
+                
+                jsonArray.add(12, act.getDescription());
                 jsonArray2.add(jsonArray);
             }
 
