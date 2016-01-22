@@ -8,7 +8,6 @@
     <body>
         <script>
             alert("Login Error");
-            
         </script>
         <h1>Login Error! Please try again</h1>
         <form action="login" method="post">

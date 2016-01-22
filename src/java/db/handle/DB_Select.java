@@ -9,6 +9,7 @@ import db.bean.ActivitiesBean;
 import db.bean.ActivitiesRecordBean;
 import db.bean.ActivityBudgetBean;
 import db.bean.AdminBean;
+import db.bean.DistrictBean;
 import db.bean.StaffBean;
 import db.bean.UserBean;
 
@@ -22,6 +23,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -224,6 +226,37 @@ public class DB_Select {
         return isValid;
     }
 
+    public ArrayList queryDistrict() {
+        Connection cnnct = null;
+        PreparedStatement pStmnt = null;
+        ArrayList list = new ArrayList();
+        DistrictBean district = null;
+        try {
+
+            ResultSet rs = null;
+            cnnct = getConnection();
+            String preQueryStatement = "SELECT* FROM DISTRICT";
+            pStmnt = cnnct.prepareStatement(preQueryStatement);
+            rs = pStmnt.executeQuery();
+            while (rs.next()) {
+                district = new DistrictBean(rs.getString(1), rs.getString(2), rs.getString(3));
+                list.add(district);
+            }
+            pStmnt.close();
+            cnnct.close();
+
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return list;
+
+    }
+
     public UserBean queryUserByUsername(String userName) {
         Connection cnnct = null;
         PreparedStatement pStmnt = null;
@@ -270,7 +303,7 @@ public class DB_Select {
             pStmnt.setString(1, StaffID);
             rs = pStmnt.executeQuery();
             while (rs.next()) {
-                user = new StaffBean(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
+                user = new StaffBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
             }
             pStmnt.close();
             cnnct.close();
@@ -381,20 +414,7 @@ public class DB_Select {
                 ex = ex.getNextException();
 
             }
-
-            /*             uname
-                 passwd     
-                        availMemberID
-                                
-                                givenname
-                                surname
-                        gender
-                                        tel
-                                                chinese
-                                             email
-                                                     0*/
         }
-
         return isSuccess;
     }
 
@@ -477,5 +497,13 @@ public class DB_Select {
         }
         return list;
     }
+
+    
+    public static Calendar DateToCalendar(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
+    }
+    
 
 }

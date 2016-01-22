@@ -26,8 +26,9 @@
         <a href="login.jsp">login</a><br>
         <a href="main.jsp">main</a><br>
         <a href="showTable.jsp">showTable</a><br>
-        
 
+        <jsp:forward page="main.jsp"/>
 
-    </body>
-</html>
+        </body>
+    </html>
+     
