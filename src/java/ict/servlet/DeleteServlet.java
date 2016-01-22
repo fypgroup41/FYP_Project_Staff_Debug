@@ -25,15 +25,26 @@ public class DeleteServlet extends HttpServlet {
         String item_id = null;
         try {
             table_type = request.getParameter("table_type");
-            item_id = request.getParameter("item_id");
-            Boolean a = db_select.delRecordBySql("DELETE FROM atype_a WHERE activitiesID='" + item_id + "'");
-            Boolean b = db_select.delRecordBySql("DELETE FROM ACTIVITIES WHERE activitiesID='" + item_id + "'");
 
-            request.setAttribute("status", "Delete Success");
-            RequestDispatcher rd
-                    = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-            rd.forward(request, response);
+            if (table_type.equals("activities")) {
+                item_id = request.getParameter("item_id");
+                Boolean a = db_select.delRecordBySql("DELETE FROM atype_a WHERE activitiesID='" + item_id + "'");
+                Boolean b = db_select.delRecordBySql("DELETE FROM ACTIVITIES WHERE activitiesID='" + item_id + "'");
 
+                request.setAttribute("status", "Delete Success");
+                RequestDispatcher rd
+                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                rd.forward(request, response);
+            }
+
+            if (table_type.equals("activityBudget")) {
+                item_id = request.getParameter("item_id");
+                Boolean a = db_select.delRecordBySql("DELETE FROM activitybudget WHERE itemID='" + item_id + "'");
+                request.setAttribute("status", "Delete Success");
+                RequestDispatcher rd
+                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                rd.forward(request, response);
+            }
         } catch (Exception ex) {
             out.println(ex.getStackTrace());
             out.println(ex.getMessage());

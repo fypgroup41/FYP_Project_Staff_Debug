@@ -4,6 +4,11 @@
     Author     : test
 --%>
 
+<%@page import="ict.caculate.DateCalculate"%>
+<%@page import="db.bean.MemberBean"%>
+<%@page import="db.bean.ActivitiesRecordBean"%>
+<%@page import="db.bean.Atype_ABean"%>
+<%@page import="db.bean.ActivityTypeBean"%>
 <%@page import="db.bean.DistrictBean"%>
 <%@page import="db.bean.UserBean"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -26,11 +31,15 @@
 
         <jsp:include page="/header.jsp"/>
         <%
+            DateCalculate dc = new DateCalculate();
+            SimpleDateFormat sdfbd = new SimpleDateFormat("yyyy-MM-dd");
             String dbUser = this.getServletContext().getInitParameter("dbUsername");
             String dbPassword = this.getServletContext().getInitParameter("dbPassword");
             String dbUrl = this.getServletContext().getInitParameter("dbUrl");
             DB_Select db_select = new DB_Select(dbUrl, dbUser, dbPassword);
             ArrayList district_data = db_select.queryDistrict();
+            ArrayList activityType = db_select.queryListAll("activityType", "");
+            ArrayList activityTypeActivities = db_select.queryListAll("atype_A", " where activitiesID='" + request.getParameter("actID") + "'");
         %>
 
 
@@ -38,7 +47,7 @@
             UserBean user = (UserBean) session.getAttribute("userInfo");
             //ArrayList aryData = db_select.queryActivitiesBySql("SELECT * FROM activities where activitiesID=\"" + request.getParameter("actID") + "\"");
 
-            ArrayList aryData = db_select.queryListAll("activities", "where activitiesID=\"" + request.getParameter("actID") + "\"");
+            ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("actID") + "\"");
             for (int i = 0; i < aryData.size(); i++) {
                 ActivitiesBean act = (ActivitiesBean) aryData.get(i);
         %>
@@ -52,6 +61,9 @@
         <span style="text-align:center"><h1><%= act.getName()%></h1></span>
         <br>
         <br>
+
+
+
         <form method="post" action="updateServlet">
             <input type="hidden" name="table_type" value="activities") >
             <input type="hidden" name="item_id" value="<%=act.getActivitiesID()%>">
@@ -98,18 +110,35 @@
                 <tr><td>date</td><td><input type="text" name="date" value="<%=act.getDate()%>" size="35"></td></tr>
                 <tr><td>tag</td><td><input type="text" name="tag" value="<%=act.getTag()%>" size="35"></td></tr>
                 <tr><td>description</td><td><textarea name="description" ><%=act.getDescription()%></textarea></td></tr>
+                <tr><td>districtNo</td><td>       <select name="activityType">
+                            <%
+                                Atype_ABean activityTypeActivities_val = (Atype_ABean) activityTypeActivities.get(0);
+                                for (int j = 0; j < activityType.size(); j++) {
+                                    ActivityTypeBean activityType_val = (ActivityTypeBean) activityType.get(j);
+                            %>
+                            <% if (!activityType_val.getActivityTypeID().toString().equals(activityTypeActivities_val.getActivityTypeID().toString())) {%>
+                            <option value="<%=activityType_val.getActivityTypeID()%>"><%=activityType_val.getTypeName()%></option>
+                            <% } else {%>
+                            <option value="<%=activityType_val.getActivityTypeID()%>" selected><%=activityType_val.getTypeName()%></option>
+                            <%   }
+                                }
+
+                            %>
+                        </select></td></tr>                
+
+
                 <tr><td>       <br><br>    <input type="submit" value="Update"></td><td></td></tr>
 
 
 
             </table>
- 
+
 
             <br>
 
 
 
-            <input type="button" onClick="alert(\"AAA\")">
+
             <a href="deleteServlet?table_type=activities&item_id=<%=act.getActivitiesID()%>">Delete Link</a>
 
 
@@ -120,7 +149,41 @@
 
 
         </form>
+        <h3>Activities Member Record</h3>
+        <table border="1">
 
+            <%         ArrayList activitiesRecord = db_select.queryListAll("ActivitiesRecord", " where activitiesID=\"" + request.getParameter("actID") + "\"");
+                for (int j = 0; j < activitiesRecord.size(); j++) {
+                    ActivitiesRecordBean activitiesRecord_val = (ActivitiesRecordBean) activitiesRecord.get(j);
+                    ArrayList member_aryData = db_select.queryListAll("member", " where memberID='" + activitiesRecord_val.getMemberID() + "'");
+                    MemberBean member_val = (MemberBean) member_aryData.get(j);
+
+            %>
+
+            <tr><th>Member ID</th><th>District ID</th><th>Age</th><th>Nick Name</th><th>Status</th></tr>
+            <tr><td><%= activitiesRecord_val.getMemberID()%></td><td><%=member_val.getDistrictID()%></td><td>
+                    <%
+                        String bate = member_val.getBirthday();
+                        Date bd = sdfbd.parse(bate);
+                        out.print(dc.calculateAge(bd));
+                    %>
+
+
+
+
+                </td><td><%=member_val.getNickName()%></td><td><%= activitiesRecord_val.getState()%></td></tr>
+
+
+
+
+            <%
+
+                }
+            %>
+
+
+
+        </table>
 
 
 

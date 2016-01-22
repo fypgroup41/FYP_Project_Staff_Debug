@@ -438,7 +438,7 @@ public class DB_Select {
 
             rs = pStmnt.executeQuery();
             while (rs.next()) {
-                activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline"), rs.getString("venue"), rs.getString("date").substring(0, rs.getString("date").length() - 2), rs.getString("tag"), rs.getString("staffID"), rs.getString("description"));
+                activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline").substring(0, rs.getString("deadline").length() - 2), rs.getString("venue"), rs.getString("date").substring(0, rs.getString("date").length() - 2), rs.getString("tag"), rs.getString("staffID"), rs.getString("description"));
                 list.add(activities);
             }
             pStmnt.close();
@@ -470,11 +470,11 @@ public class DB_Select {
             ResultSet rs = null;
 
             if (table.equals("activities")) {
-                String preQueryStatement = "SELECT* FROM ACTIVITIES " + condition;
+                String preQueryStatement = "SELECT* FROM ACTIVITIES" + condition;
                 pStmnt = cnnct.prepareStatement(preQueryStatement);
                 rs = pStmnt.executeQuery();
                 while (rs.next()) {
-                    ActivitiesBean activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline"), rs.getString("venue"), rs.getString("date").substring(0, rs.getString("date").length() - 2), rs.getString("tag"), rs.getString("staffID"), rs.getString("description"));
+                    ActivitiesBean activities = new ActivitiesBean(rs.getString("activitiesID"), rs.getString("name"), rs.getString("districtNo"), rs.getInt("quota"), rs.getInt("remain"), rs.getInt("targetAgeMax"), rs.getInt("targetAgeMin"), rs.getString("deadline").substring(0, rs.getString("deadline").length() - 2), rs.getString("venue"), rs.getString("date").substring(0, rs.getString("date").length() - 2), rs.getString("tag"), rs.getString("staffID"), rs.getString("description"));
                     list.add(activities);
                 }
                 pStmnt.close();

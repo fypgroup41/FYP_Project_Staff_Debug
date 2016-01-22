@@ -18,7 +18,7 @@
                 $("#activities").addClass("active");
                 $.ajax({
                     type: "POST",
-                    data: "id=<%="2"%>",
+                    data: "id=<%="10"%>",
                     url: "activity_json",
                     success: function (data) {
                         var obj = jQuery.parseJSON(data);

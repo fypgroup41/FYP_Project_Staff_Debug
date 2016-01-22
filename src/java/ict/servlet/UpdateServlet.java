@@ -37,8 +37,9 @@ public class UpdateServlet extends HttpServlet {
                 String venue = null;
                 String date = null;
                 String tag = null;
+                String activityType = null;
                 String description = null;
-
+                activityType = request.getParameter("activityType");
                 item_id = request.getParameter("item_id");
                 name = request.getParameter("name");
                 districtNo = request.getParameter("districtNo");
@@ -52,12 +53,34 @@ public class UpdateServlet extends HttpServlet {
                 description = request.getParameter("description");
                 String sql = " UPDATE ACTIVITIES SET name ='" + name + "'  ,districtNo='" + districtNo + "'  , quota='" + quota + "'  ,targetAgeMax=" + targetAgeMax + "  ,targetAgeMin=" + targetAgeMin + "  ,deadline='" + deadline + "'  ,venue='" + venue + "'  ,date='" + date + "'  ,tag='" + tag + "'  ,description='" + description + "'  WHERE activitiesID='" + item_id + "'";
                 boolean isSuccess = db_select.editRecordBySql(sql);
-
+                sql = " UPDATE ATYPE_A SET activityTypeID='" + activityType + "' WHERE activitiesID='" + item_id + "'";
+                isSuccess = db_select.editRecordBySql(sql);
                 request.setAttribute("status", "Update Success");
                 RequestDispatcher rd
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
 
+            }
+
+            if (table_type.equals("activityBudget")) {
+                String item_id = null;
+                String itemName = null;
+                String itemType = null;
+                String cost = null;
+                String number = null;
+                String remark = null;
+                item_id = request.getParameter("item_id");
+                itemName = request.getParameter("itemName");
+                itemType = request.getParameter("itemType");
+                cost = request.getParameter("cost");
+                number = request.getParameter("number");
+                remark = request.getParameter("remark");
+                String sql = " UPDATE ACTIVITYBUDGET SET  itemName='" + itemName + "', itemType='" + itemType + "', cost=" + cost + ",number=" + number + " ,remark='" + remark + "' WHERE itemID='" + item_id + "'";
+                boolean isSuccess = db_select.editRecordBySql(sql);
+                request.setAttribute("status", "Update Success");
+                RequestDispatcher rd
+                        = request.getServletContext().getRequestDispatcher("/activitiesBudget.jsp");
+                rd.forward(request, response);
             }
 
         } catch (Exception ex) {
