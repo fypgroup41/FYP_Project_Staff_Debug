@@ -1,5 +1,7 @@
 package db.bean;
 
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +11,7 @@ package db.bean;
  *
  * @author test
  */
-public class UserBean {
+public class UserBean implements Serializable{
 
     String userID;
     String userName;
@@ -24,6 +26,9 @@ public class UserBean {
     String name_ch;
     String email;
     int isAuthenticated;
+
+    public UserBean() {
+    }
 
     public UserBean(String userID, String userName, String password, String memberID, String adminID, String staffID, String firstName_eng, String lastName_eng, String sex, String tel, String name_ch, String email, int isAuthenticated) {
         this.userID = userID;

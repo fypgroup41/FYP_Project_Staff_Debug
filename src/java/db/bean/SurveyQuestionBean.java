@@ -1,29 +1,35 @@
 package db.bean;
 
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author test
  */
-public class SurveyQuestionBean {
+public class SurveyQuestionBean implements Serializable {
 
     String sqID;
     String question;
     int qTypeID;
     int maxMark;
     int minMark;
+    String surveyID;
 
-    public SurveyQuestionBean(String sqID, String question, int qTypeID, int maxMark, int minMark) {
+    public SurveyQuestionBean() {
+    }
+
+    public SurveyQuestionBean(String sqID, String question, int qTypeID, int maxMark, int minMark, String surveyID) {
         this.sqID = sqID;
         this.question = question;
         this.qTypeID = qTypeID;
         this.maxMark = maxMark;
         this.minMark = minMark;
+        this.surveyID = surveyID;
     }
 
     public String getSqID() {
@@ -64,6 +70,14 @@ public class SurveyQuestionBean {
 
     public void setMinMark(int minMark) {
         this.minMark = minMark;
+    }
+
+    public String getSurveyID() {
+        return surveyID;
+    }
+
+    public void setSurveyID(String surveyID) {
+        this.surveyID = surveyID;
     }
 
 }

@@ -86,7 +86,6 @@ public class InsertServlet extends HttpServlet {
                 rd.forward(request, response);
             }
             if (table_type.equals("activityTimetable")) {
-
                 String detail = null;
                 String startTime = null;
                 String finish = null;
@@ -106,6 +105,27 @@ public class InsertServlet extends HttpServlet {
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
             }
+            if (table_type.equals("survey")) {
+                String survey_id = null;
+                String qTypeID = null;
+                String question = null;
+
+                survey_id = request.getParameter("survey_id");
+                qTypeID = request.getParameter("qTypeID");
+                question = request.getParameter("question");
+
+                String validID = db_select.getAvailSurveyQuestionID();
+                String sql = "INSERT INTO `surveyquestion` (`sqID`, `question`, `qTypeID`, `maxMark`, `minMark`,`surveyID`) VALUES ('" + validID + "', '" + question + "', '" + qTypeID + "', " + "10" + ", " + "1" + ",'" + survey_id + "');";
+
+                boolean isSuccess = db_select.editRecordBySql(sql);
+
+                request.setAttribute("status", "Insert Success");
+                request.setAttribute("link", "surveyDetail.jsp");
+                RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                rd.forward(request, response);
+            }
+     
+//<a href="insertServlet?table_type=survey_create&activities_id=<%=act.getActivitiesID()%>">TimeTable Link</a>
         } catch (Exception ex) {
 
             out.println(ex.getMessage());

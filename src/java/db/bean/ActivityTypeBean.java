@@ -1,5 +1,7 @@
 package db.bean;
 
+import java.io.Serializable;
+
 
 
 /*
@@ -11,11 +13,16 @@ package db.bean;
  *
  * @author test
  */
-public class ActivityTypeBean {
+public class ActivityTypeBean implements Serializable{
 
     String activityTypeID;
     String typeName;
     String description;
+
+    @Override
+    public String toString() {
+        return "ActivityTypeBean{" + "activityTypeID=" + activityTypeID + ", typeName=" + typeName + ", description=" + description + '}';
+    }
 
     public ActivityTypeBean(String activityTypeID, String typeName, String description) {
         this.activityTypeID = activityTypeID;

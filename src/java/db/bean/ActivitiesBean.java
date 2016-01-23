@@ -1,6 +1,8 @@
 package db.bean;
 
-public class ActivitiesBean {
+import java.io.Serializable;
+
+public class ActivitiesBean  implements Serializable{
 
     String activitiesID;
     String name;

@@ -1,5 +1,7 @@
 package db.bean;
 
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +12,14 @@ package db.bean;
  *
  * @author test
  */
-public class JobRecordBean {
+public class JobRecordBean implements Serializable{
 
     String jobID;
     String activitiesID;
     String memberID;
+
+    public JobRecordBean() {
+    }
 
     public JobRecordBean(String jobID, String activitiesID, String memberID) {
         this.jobID = jobID;

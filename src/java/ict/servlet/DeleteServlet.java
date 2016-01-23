@@ -65,6 +65,17 @@ public class DeleteServlet extends HttpServlet {
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
             }
+            if (table_type.equals("survey")) {
+                String sqID = null;
+                sqID = request.getParameter("sqID");
+                Boolean a = db_select.delRecordBySql("DELETE FROM surveyquestion WHERE sqID='" + sqID + "'");
+                request.setAttribute("status", "\"DELETE FROM surveyquestion WHERE sqID='" + sqID + "'");
+                request.setAttribute("link", "surveyDetail.jsp");
+                RequestDispatcher rd
+                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                rd.forward(request, response);
+
+            }
         } catch (Exception ex) {
             out.println(ex.getStackTrace());
             out.println(ex.getMessage());

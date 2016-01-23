@@ -1,26 +1,30 @@
 package db.bean;
 
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author test
  */
-public class ActivityTimetableBean {
+public class ActivityTimetableBean implements Serializable{
 
     String activityTimeTableID;
-    String Activities_activitiesID;
+    String activitiesID;
     String detail;
     String startTime;
     String finish;
 
-    public ActivityTimetableBean(String activityTimeTableID, String Activities_activitiesID, String detail, String startTime, String finish) {
+    public ActivityTimetableBean() {
+    }
+
+    public ActivityTimetableBean(String activityTimeTableID, String activitiesID, String detail, String startTime, String finish) {
         this.activityTimeTableID = activityTimeTableID;
-        this.Activities_activitiesID = Activities_activitiesID;
+        this.activitiesID = activitiesID;
         this.detail = detail;
         this.startTime = startTime;
         this.finish = finish;
@@ -34,12 +38,12 @@ public class ActivityTimetableBean {
         this.activityTimeTableID = activityTimeTableID;
     }
 
-    public String getActivities_activitiesID() {
-        return Activities_activitiesID;
+    public String getActivitiesID() {
+        return activitiesID;
     }
 
-    public void setActivities_activitiesID(String Activities_activitiesID) {
-        this.Activities_activitiesID = Activities_activitiesID;
+    public void setActivitiesID(String activitiesID) {
+        this.activitiesID = activitiesID;
     }
 
     public String getDetail() {

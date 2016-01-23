@@ -4,6 +4,8 @@
     Author     : test
 --%>
 
+<%@page import="db.bean.SurveyQuestionBean"%>
+<%@page import="db.bean.SurveyqTypeBean"%>
 <%@page import="db.bean.ActivitiesBean"%>
 <%@page import="db.bean.UserBean"%>
 <%@page import="db.bean.SurveyBean"%>
@@ -23,24 +25,22 @@
             String dbPassword = this.getServletContext().getInitParameter("dbPassword");
             String dbUrl = this.getServletContext().getInitParameter("dbUrl");
             DB_Select db_select = new DB_Select(dbUrl, dbUser, dbPassword);
+            ArrayList surveyqType = db_select.queryListAll("surveyqType", "");
+
+            String activities_id = request.getParameter("activities_id");
+            String[] surveyType = new String[surveyqType.size()];
 
 
+        %>  
+
+    
+
+
+        <%
+            ArrayList surveyQuestion = db_select.queryListAll("surveyQuestion", " where survey_id='" + "1" + "'");
+            out.print(surveyQuestion.size()+"A");
         %>
+        
 
-        <table border="1">
-
-            <%                        ArrayList survey = db_select.queryListAll("survey", "");
-                for (int j = 0; j < survey.size(); j++) {
-                    SurveyBean survey_val = (SurveyBean) survey.get(j);
-                    ArrayList activities = db_select.queryListAll("activities", " where activitiesID=" + survey_val.getActivitiesID());
-                    ActivitiesBean activities_val = (ActivitiesBean) activities.get(0);
-
-            %>
-            <tr>
-                <td><%= activities_val.getName()%></td><td><a href="surveyDetail.jsp?activities_id=<%=survey_val.getActivitiesID()%>">For More Detail</a></td></tr>
-                <%
-                    }
-
-                %>
-    </body>
+</body>
 </html>

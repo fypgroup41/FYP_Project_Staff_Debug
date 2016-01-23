@@ -20,6 +20,7 @@ import db.bean.JobRecordBean;
 import db.bean.MemberBean;
 import db.bean.StaffBean;
 import db.bean.SurveyAnswerBean;
+import db.bean.SurveyBean;
 import db.bean.SurveyQuestionBean;
 import db.bean.SurveyqTypeBean;
 import db.bean.UserBean;
@@ -304,6 +305,35 @@ public class DB_Select {
         return newAvaildID + "";
     }
 
+    public String getAvailSurveyID() {
+        Connection cnnct = null;
+        boolean isSuccess = false;
+        SimpleDateFormat formatter = null;
+        java.util.Date utilDate = null;
+        ResultSet rs = null;
+        String maxID = null;
+        int newAvaildID = -1;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "select surveyID from survey ORDER BY CAST(surveyID AS SIGNED) DESC LIMIT 1";
+            PreparedStatement pStmnt = cnnct.prepareStatement(preQueryStatement);
+            rs = pStmnt.executeQuery();
+            while (rs.next()) {
+                maxID = rs.getString(1);
+            }
+            newAvaildID = Integer.parseInt(maxID) + 1;
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return newAvaildID + "";
+    }
+
     public String getAvailActivitiesID() {
         Connection cnnct = null;
         boolean isSuccess = false;
@@ -391,6 +421,35 @@ public class DB_Select {
         return newAvaildID + "";
     }
 
+    public String getAvailSurveyAnswerID() {
+        Connection cnnct = null;
+        boolean isSuccess = false;
+        SimpleDateFormat formatter = null;
+        java.util.Date utilDate = null;
+        ResultSet rs = null;
+        String maxID = null;
+        int newAvaildID = -1;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "select saID from surveyanswer ORDER BY CAST(saID AS SIGNED) DESC LIMIT 1";
+            PreparedStatement pStmnt = cnnct.prepareStatement(preQueryStatement);
+            rs = pStmnt.executeQuery();
+            while (rs.next()) {
+                maxID = rs.getString(1);
+            }
+            newAvaildID = Integer.parseInt(maxID) + 1;
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return newAvaildID + "";
+    }
+
     public String getAvailTimeTableID() {
         Connection cnnct = null;
         boolean isSuccess = false;
@@ -402,6 +461,35 @@ public class DB_Select {
         try {
             cnnct = getConnection();
             String preQueryStatement = "select activityTimeTableID from activitytimetable ORDER BY CAST(activityTimeTableID AS SIGNED) DESC LIMIT 1";
+            PreparedStatement pStmnt = cnnct.prepareStatement(preQueryStatement);
+            rs = pStmnt.executeQuery();
+            while (rs.next()) {
+                maxID = rs.getString(1);
+            }
+            newAvaildID = Integer.parseInt(maxID) + 1;
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return newAvaildID + "";
+    }
+
+    public String getAvailSurveyQuestionID() {
+        Connection cnnct = null;
+        boolean isSuccess = false;
+        SimpleDateFormat formatter = null;
+        java.util.Date utilDate = null;
+        ResultSet rs = null;
+        String maxID = null;
+        int newAvaildID = -1;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "select sqID from surveyquestion ORDER BY CAST(sqID AS SIGNED) DESC LIMIT 1";
             PreparedStatement pStmnt = cnnct.prepareStatement(preQueryStatement);
             rs = pStmnt.executeQuery();
             while (rs.next()) {
@@ -705,17 +793,17 @@ public class DB_Select {
                 pStmnt = cnnct.prepareStatement(preQueryStatement);
                 rs = pStmnt.executeQuery();
                 while (rs.next()) {
-                    SurveyAnswerBean surveyAnswer = new SurveyAnswerBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                    SurveyAnswerBean surveyAnswer = new SurveyAnswerBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4));
                     list.add(surveyAnswer);
                 }
                 pStmnt.close();
             }
             if (table.equals("surveyQuestion")) {
-                String preQueryStatement = "SELECT* FROM ACTIVITIES" + condition;
+                String preQueryStatement = "SELECT* FROM surveyQuestion " + condition;
                 pStmnt = cnnct.prepareStatement(preQueryStatement);
                 rs = pStmnt.executeQuery();
                 while (rs.next()) {
-                    SurveyQuestionBean surveyQuestion = new SurveyQuestionBean(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5));
+                    SurveyQuestionBean surveyQuestion = new SurveyQuestionBean(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getString(6));
                     list.add(surveyQuestion);
                 }
                 pStmnt.close();
@@ -732,13 +820,14 @@ public class DB_Select {
                 pStmnt.close();
 
             }
-            if (table.equals("UserBean")) {
-                String preQueryStatement = "SELECT* FROM ACTIVITIES" + condition;
+
+            if (table.equals("survey")) {
+                String preQueryStatement = "SELECT* FROM Survey " + condition;
                 pStmnt = cnnct.prepareStatement(preQueryStatement);
                 rs = pStmnt.executeQuery();
                 while (rs.next()) {
-                    UserBean user = new UserBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getInt(13));
-                    list.add(user);
+                    SurveyBean survey = new SurveyBean(rs.getString(1), rs.getString(2));
+                    list.add(survey);
                 }
                 pStmnt.close();
 

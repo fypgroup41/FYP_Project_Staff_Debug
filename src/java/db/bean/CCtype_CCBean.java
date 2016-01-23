@@ -1,5 +1,7 @@
 package db.bean;
 
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,10 +12,13 @@ package db.bean;
  *
  * @author test
  */
-public class CCtype_CCBean {
+public class CCtype_CCBean implements Serializable{
 
     String ccTypeID;
     String ccID;
+
+    public CCtype_CCBean() {
+    }
 
     public CCtype_CCBean(String ccTypeID, String ccID) {
         this.ccTypeID = ccTypeID;

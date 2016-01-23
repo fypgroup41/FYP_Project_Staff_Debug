@@ -15,6 +15,9 @@ public class SurveyqTypeBean {
     String sQTypeID;
     String name;
 
+    public SurveyqTypeBean() {
+    }
+
     public SurveyqTypeBean(String sQTypeID, String name) {
         this.sQTypeID = sQTypeID;
         this.name = name;

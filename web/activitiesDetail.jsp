@@ -43,10 +43,11 @@
         %>
 
         <%            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            UserBean user = (UserBean) session.getAttribute("userInfo");
+
             ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("actID") + "\"");
             for (int i = 0; i < aryData.size(); i++) {
                 ActivitiesBean act = (ActivitiesBean) aryData.get(i);
+
         %>
 
 
@@ -59,10 +60,9 @@
         <br>
         <br>
 
-
-
         <form method="post" action="updateServlet">
-            <input type="hidden" name="table_type" value="activities") >
+            <input type="hidden" name="table_type" value="activities" >
+            
             <input type="hidden" name="activities_id" value="<%=act.getActivitiesID()%>">
             <table  align="center" >
 
@@ -101,7 +101,6 @@
                                 ActivityTypeBean activityType_val = (ActivityTypeBean) activityType.get(j);
                         %>
                         <% if (!activityType_val.getActivityTypeID().toString().equals(activityTypeActivities_val.getActivityTypeID().toString())) {%>
-
                         <% } else {%>
                         <%=activityType_val.getTypeName()%>
                         <%   }
@@ -126,6 +125,7 @@
             <a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>">Delete Link</a>
             <a href="activitiesBudget.jsp?activities_id=<%=act.getActivitiesID()%>">Budget Link</a>
             <a href="activitiyTimetable.jsp?activities_id=<%=act.getActivitiesID()%>">TimeTable Link</a>
+            <a href="surveyCreate.jsp?table_type=survey_create&activities_id=<%=act.getActivitiesID()%>">TimeTable Link</a>
 
 
 
@@ -137,30 +137,22 @@
         </form>
         <h3>Activities Member Record</h3>
         <table border="1">
-
-            <%         ArrayList activitiesRecord = db_select.queryListAll("ActivitiesRecord", " where activitiesID=\"" + request.getParameter("actID") + "\"");
-                for (int j = 0; j < activitiesRecord.size(); j++) {
-                    ActivitiesRecordBean activitiesRecord_val = (ActivitiesRecordBean) activitiesRecord.get(j);
-                    ArrayList member_aryData = db_select.queryListAll("member", " where memberID='" + activitiesRecord_val.getMemberID() + "'");
-                    MemberBean member_val = (MemberBean) member_aryData.get(j);
-
-            %>
-
             <tr><th>Member ID</th><th>District ID</th><th>Age</th><th>Nick Name</th><th>Status</th></tr>
-            <tr><td><%= activitiesRecord_val.getMemberID()%></td><td><%=member_val.getDistrictID()%></td><td>
-                    <%
-                        String bate = member_val.getBirthday();
-                        Date bd = sdfbd.parse(bate);
-                        out.print(dc.calculateAge(bd));
+                    <%                ArrayList activitiesRecord = db_select.queryListAll("ActivitiesRecord", " where activitiesID=\"" + request.getParameter("actID") + "\"");
+                        for (int j = 0; j < activitiesRecord.size(); j++) {
+                            ActivitiesRecordBean activitiesRecord_val = (ActivitiesRecordBean) activitiesRecord.get(j);
+                            ArrayList member_aryData = db_select.queryListAll("member", " where memberID='" + activitiesRecord_val.getMemberID() + "'");
+                            MemberBean member_val2 = (MemberBean) member_aryData.get(0);
                     %>
 
 
-
-
-                </td><td><%=member_val.getNickName()%></td><td><%= activitiesRecord_val.getState()%></td></tr>
-
-
-
+            <tr><td><%= activitiesRecord_val.getMemberID()%></td><td><%=member_val2.getDistrictID()%></td><td>
+                    <%
+                        String bate = member_val2.getBirthday();
+                        Date bd = sdfbd.parse(bate);
+                        out.print(dc.calculateAge(bd));
+                    %>
+                </td><td><%=member_val2.getNickName()%></td><td><%= activitiesRecord_val.getState()%></td></tr>
 
             <%
 
@@ -168,9 +160,7 @@
             %>
 
 
-
         </table>
-
 
 
     </body>

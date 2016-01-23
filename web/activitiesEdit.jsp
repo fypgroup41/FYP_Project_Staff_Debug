@@ -62,7 +62,7 @@
 
 
         <form method="post" action="updateServlet">
-            <input type="hidden" name="table_type" value="activities") >
+            <input type="hidden" name="table_type" value="activities">
             <input type="hidden" name="activities_id" value="<%=act.getActivitiesID()%>">
             <table  align="center" >
 

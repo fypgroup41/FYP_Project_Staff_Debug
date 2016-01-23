@@ -7,6 +7,7 @@ package ict.servlet;
 
 import db.handle.DB_Select;
 import java.io.*;
+import java.util.Enumeration;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
@@ -102,7 +103,50 @@ public class UpdateServlet extends HttpServlet {
                 String sql = " UPDATE ACTIVITYTIMETABLE SET  detail='" + detail + "', startTime='" + startTime + "', finish='" + finish + "' where activityTimeTableID='" + activityTimeTableID + "'";
                 boolean isSuccess = db_select.editRecordBySql(sql);
                 request.setAttribute("status", sql);
-                request.setAttribute("link", "activitiyTimetable.jsp?activities_id="+activities_id);
+                request.setAttribute("link", "activitiyTimetable.jsp?activities_id=" + activities_id);
+                RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                rd.forward(request, response);
+            }
+            if (table_type.equals("survey")) {
+
+                Enumeration<String> parameterNames = request.getParameterNames();
+
+                String question = null;
+                String questionType = null;
+                while (parameterNames.hasMoreElements()) {
+                    String paramName = parameterNames.nextElement();
+                    String val = "";
+                    if (paramName.contains("question_")) {
+
+                        String[] paramValues = request.getParameterValues(paramName);
+
+                        for (int i = 0; i < paramValues.length; i++) {
+                            String paramValue = paramValues[i];
+                            question = paramValue;
+
+                            String sql = "UPDATE surveyquestion set question='" + question + "' where sqID='" + paramName.substring(9, paramName.length()) + "'";
+                            boolean isSuccess = db_select.editRecordBySql(sql);
+
+                        }
+
+                    }
+
+                    if (paramName.contains("qTypeID_")) {
+                        String[] paramValues = request.getParameterValues(paramName);
+
+                        for (int i = 0; i < paramValues.length; i++) {
+                            String paramValue = paramValues[i];
+                            questionType = paramValue;
+                            String sql = " UPDATE surveyquestion set qTypeID='" + paramValue + "' where sqID='" + paramName.substring(8, paramName.length()) + "'";
+                            boolean isSuccess = db_select.editRecordBySql(sql);
+
+                        }
+
+                    }
+
+                }
+                request.setAttribute("status", "Update Success");
+                request.setAttribute("link", "surveyDetail.jsp?activities_id=" + request.getParameter("activities_id"));
                 RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
             }

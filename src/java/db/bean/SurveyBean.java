@@ -1,36 +1,35 @@
-package db.bean;
-
-import java.io.Serializable;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package db.bean;
+
+import java.io.Serializable;
 
 /**
  *
  * @author test
  */
-public class Atype_ABean implements Serializable{
+public class SurveyBean implements Serializable{
 
-    String activityTypeID;
+    String surveyID;
     String activitiesID;
 
-    public Atype_ABean() {
+    public SurveyBean() {
     }
 
-    public Atype_ABean(String activityTypeID, String activitiesID) {
-        this.activityTypeID = activityTypeID;
+    public SurveyBean(String surveyID, String activitiesID) {
+        this.surveyID = surveyID;
         this.activitiesID = activitiesID;
     }
 
-    public String getActivityTypeID() {
-        return activityTypeID;
+    public String getSurveyID() {
+        return surveyID;
     }
 
-    public void setActivityTypeID(String activityTypeID) {
-        this.activityTypeID = activityTypeID;
+    public void setSurveyID(String surveyID) {
+        this.surveyID = surveyID;
     }
 
     public String getActivitiesID() {

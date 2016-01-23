@@ -1,5 +1,7 @@
 package db.bean;
 
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +11,7 @@ package db.bean;
  *
  * @author test
  */
-public class ActivityBudgetBean {
+public class ActivityBudgetBean implements Serializable{
 
     String itemID;
     String activitiesID;
@@ -18,6 +20,9 @@ public class ActivityBudgetBean {
     double cost;
     int number;
     String remark;
+
+    public ActivityBudgetBean() {
+    }
 
     public ActivityBudgetBean(String itemID, String activitiesID, String itemName, String itemType, double cost, int number, String remark) {
         this.itemID = itemID;

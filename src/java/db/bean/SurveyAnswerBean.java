@@ -17,12 +17,15 @@ public class SurveyAnswerBean {
     String memberID;
     String userID;
 
-    public SurveyAnswerBean(String saID, String answer, String sqID, String memberID, String userID) {
+    public SurveyAnswerBean() {
+    }
+
+    public SurveyAnswerBean(String saID, String answer, String sqID, String memberID) {
         this.saID = saID;
         this.answer = answer;
         this.sqID = sqID;
         this.memberID = memberID;
-        this.userID = userID;
+
     }
 
     public String getSaID() {
@@ -57,11 +60,4 @@ public class SurveyAnswerBean {
         this.memberID = memberID;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
 }

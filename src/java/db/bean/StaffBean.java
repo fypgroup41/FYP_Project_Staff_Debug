@@ -1,5 +1,7 @@
 package db.bean;
 
+import java.io.Serializable;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +11,15 @@ package db.bean;
  *
  * @author test
  */
-public class StaffBean {
+public class StaffBean implements Serializable{
 
     String staffID;
     String districtID;
     String ccID;
     String position;
+
+    public StaffBean() {
+    }
 
     public StaffBean(String staffID, String districtID, String ccID, String position) {
         this.staffID = staffID;

@@ -69,4 +69,12 @@
         <servlet-name>insertServlet</servlet-name>
         <url-pattern>/insertServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>surveyReceive</servlet-name>
+        <servlet-class>ict.servlet.SurveyReceive</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>surveyReceive</servlet-name>
+        <url-pattern>/surveyReceive</url-pattern>
+    </servlet-mapping>
 </web-app>

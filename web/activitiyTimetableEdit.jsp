@@ -51,17 +51,14 @@
         %>        
         <form method="post" action="updateServlet">
             <table border="1">
-                <input type="hidden" name="table_type" value="activityTimetable") >
+                <input type="hidden" name="table_type" value="activityTimetable" >
                 <input type="hidden" name="activityTimeTableID" value="<%=activityTimetable_val.getActivityTimeTableID()%>">
-                <input type="hidden" name="activities_id" value="<%=activityTimetable_val.getActivities_activitiesID()%>">
+                <input type="hidden" name="activities_id" value="<%=activityTimetable_val.getActivitiesID()%>">
                 <tr><td>activityTimeTableID</td><td><%=activityTimetable_val.getActivityTimeTableID()%></td></tr>
                 <tr><td>activitiesID</td><td><input type="text" name="activitiesID" value="<%=activityTimetable_val.getActivityTimeTableID()%>"></td></tr>
                 <tr><td>detail</td><td><input type="text" name="detail" value="<%=activityTimetable_val.getDetail()%>"></td></tr>
                 <tr><td>startTime</td><td><input type="text" name="startTime" value="<%=activityTimetable_val.getFinish()%>"></td></tr>
                 <tr><td>finish</td><td><input type="text" name="finish" value="<%=activityTimetable_val.getStartTime()%>"></td></tr>
-
-
-
 
                 </td>
                 </tr>
@@ -71,7 +68,7 @@
                     }
                 %>
 
-                
+
 
             </table>
             <input type="submit" value="Update">
