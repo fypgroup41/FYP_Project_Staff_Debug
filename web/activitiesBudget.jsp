@@ -23,14 +23,19 @@
 <html>
     <head>
         <jsp:include page="/sourceLink.jsp"/>
-
+                <jsp:include page="/header.jsp"/>
+        <%
+            if (session.getAttribute("staffInfo") == null) {
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            }
+        %>
 
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     <body>
 
-        <jsp:include page="/header.jsp"/>
         <%
             DateCalculate dc = new DateCalculate();
             SimpleDateFormat sdfbd = new SimpleDateFormat("yyyy-MM-dd");
@@ -69,14 +74,14 @@
 
                 </td>
             </tr>
-            
-            
+
+
             <%
                 }
             %>
             <tr><td></td><td></td><td></td><td></td><td></td><td></td><td>  $ <%=budget%></td></tr>
-          
-            
+
+
         </table>
 
     </body>

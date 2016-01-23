@@ -17,8 +17,15 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <jsp:include page="/sourceLink.jsp"/>
+        <jsp:include page="/header.jsp"/>
         <%
-
+            if (session.getAttribute("staffInfo") == null) {
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            }
+        %>
+        <%
             String dbUser = this.getServletContext().getInitParameter("dbUsername");
             String dbPassword = this.getServletContext().getInitParameter("dbPassword");
             String dbUrl = this.getServletContext().getInitParameter("dbUrl");

@@ -17,5 +17,6 @@
             <input type="submit" id="button_login" value="Login"  />
         </form>
         <a href="main.jsp">Get Back</a>
+        <jsp:include page="/footer.jsp"/>
     </body>
 </html>

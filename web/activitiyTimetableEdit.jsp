@@ -30,8 +30,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     <body>
-
+        <jsp:include page="/sourceLink.jsp"/>
         <jsp:include page="/header.jsp"/>
+        <%
+            if (session.getAttribute("staffInfo") == null) {
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            }
+        %>
+
         <%
             DateCalculate dc = new DateCalculate();
             SimpleDateFormat sdfbd = new SimpleDateFormat("yyyy-MM-dd");
@@ -40,8 +47,6 @@
             String dbUrl = this.getServletContext().getInitParameter("dbUrl");
             DB_Select db_select = new DB_Select(dbUrl, dbUser, dbPassword);
             //ArrayList activityBudget = db_select.queryListAll("activityBudget", "activitiesID='" + request.getParameter("actID") + "'");
-
-
         %>
 
         <%              double budget = 0;

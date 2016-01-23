@@ -14,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body style="width:100%;height:100%">
-        <jsp:include page="/header.jsp"/>
-        <h1>This is a main page</h1>
+        <jsp:include page="/activities.jsp"/>
+            
     </body>
 </html>

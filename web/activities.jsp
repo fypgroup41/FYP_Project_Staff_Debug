@@ -9,8 +9,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <jsp:include page="/sourceLink.jsp"/>
 
+        <jsp:include page="/sourceLink.jsp"/>
+        <%
+            if (session.getAttribute("staffInfo") == null) {
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            }
+        %>
         <script>
             var dataSet;
             var table;

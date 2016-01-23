@@ -13,9 +13,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-
+        <jsp:include page="/sourceLink.jsp"/>
+        <jsp:include page="/header.jsp"/>
         <%
-
+            if (session.getAttribute("staffInfo") == null) {
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            }
+        %>
+        <%
             String dbUser = this.getServletContext().getInitParameter("dbUsername");
             String dbPassword = this.getServletContext().getInitParameter("dbPassword");
             String dbUrl = this.getServletContext().getInitParameter("dbUrl");
@@ -23,8 +29,7 @@
 
 
         %>
-        <%           
-            if (request.getParameter("table_type").equals("survey_create")) {
+        <%            if (request.getParameter("table_type").equals("survey_create")) {
                 String activities_id = null;
                 activities_id = request.getParameter("activities_id");
                 String sql = "INSERT INTO `survey` (`surveyID`, `activitiesID`) VALUES ('" + db_select.getAvailSurveyID() + "', '" + activities_id + "');";

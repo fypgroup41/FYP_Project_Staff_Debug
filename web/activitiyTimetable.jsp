@@ -31,7 +31,15 @@
         <title>JSP Page</title>
     <body>
 
+        <jsp:include page="/sourceLink.jsp"/>
         <jsp:include page="/header.jsp"/>
+        <%
+            if (session.getAttribute("staffInfo") == null) {
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            }
+        %>
+
         <%
             DateCalculate dc = new DateCalculate();
             SimpleDateFormat sdfbd = new SimpleDateFormat("yyyy-MM-dd");

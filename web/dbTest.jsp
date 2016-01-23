@@ -20,7 +20,12 @@
     </head>
     <body>
         <%
-
+            if (session.getAttribute("staffInfo") == null) {
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            }
+        %>
+        <%
             String dbUser = this.getServletContext().getInitParameter("dbUsername");
             String dbPassword = this.getServletContext().getInitParameter("dbPassword");
             String dbUrl = this.getServletContext().getInitParameter("dbUrl");
@@ -33,14 +38,13 @@
 
         %>  
 
-    
 
 
-        <%
-            ArrayList surveyQuestion = db_select.queryListAll("surveyQuestion", " where survey_id='" + "1" + "'");
-            out.print(surveyQuestion.size()+"A");
+
+        <%            ArrayList surveyQuestion = db_select.queryListAll("surveyQuestion", " where survey_id='" + "1" + "'");
+            out.print(surveyQuestion.size() + "A");
         %>
-        
 
-</body>
+
+    </body>
 </html>

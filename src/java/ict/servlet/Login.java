@@ -50,9 +50,11 @@ public class Login extends HttpServlet {
                     response.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED);
                     break;
             }
-            RequestDispatcher rd;
-            rd = getServletContext().getRequestDispatcher("/errorLogin.jsp");
-            rd.forward(request, response);
+            //  RequestDispatcher rd;
+            //  rd = getServletContext().getRequestDispatcher("/errorLogin.jsp");
+            // rd.forward(request, response);
+
+            out.println(action);
         } catch (Exception ex) {
             PrintWriter out = response.getWriter();
             out.println(ex.getMessage());
@@ -70,7 +72,7 @@ public class Login extends HttpServlet {
 
     private void doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        response.sendRedirect(request.getContextPath() + ("/main.jsp"));
+        response.sendRedirect(request.getContextPath() + ("/activities.jsp"));
     }
 
     private void doLogout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -89,6 +91,8 @@ public class Login extends HttpServlet {
             String password = request.getParameter("password");
             String targetURL;
             boolean isValid = db_select.isValidStaff(username, password);
+            PrintWriter out = response.getWriter();
+
             if (isValid) {
                 HttpSession session;
                 session = request.getSession(true);
@@ -100,7 +104,7 @@ public class Login extends HttpServlet {
                     session.setAttribute("displayName", user.getLastName_eng() + " " + user.getFirstName_eng());
                 }
                 RequestDispatcher rd;
-                rd = getServletContext().getRequestDispatcher("/main.jsp");
+                rd = getServletContext().getRequestDispatcher("/activities.jsp");
                 rd.forward(request, response);
             } else {
                 RequestDispatcher rd;

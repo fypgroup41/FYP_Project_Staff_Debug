@@ -14,6 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
         <%
 
             String dbUser = this.getServletContext().getInitParameter("dbUsername");
@@ -28,6 +29,13 @@
     </head>
     <body>
 
+        <jsp:include page="/sourceLink.jsp"/>
+        <jsp:include page="/header.jsp"/>
+        <%          if (session.getAttribute("staffInfo") == null) {
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            }
+        %>
         <form method="post" action="insertServlet">
 
             <table  align="center" >

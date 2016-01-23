@@ -14,7 +14,8 @@
     </head>
     <body>
         <%@ taglib uri="/WEB-INF/tlds/ict-taglib2.tld" prefix="ict2" %>
-
+        <jsp:include page="/sourceLink.jsp"/>
+        <jsp:include page="/header.jsp"/>
         <%
             String dbUser = this.getServletContext().getInitParameter("dbUsername");
             String dbPassword = this.getServletContext().getInitParameter("dbPassword");

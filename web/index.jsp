@@ -18,7 +18,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-
+        <jsp:include page="/sourceLink.jsp"/>
+        <jsp:include page="/header.jsp"/>
         <a href="Companyuser_regform.jsp">Companyuser_regform</a><br>
         <a href="Companyuser_regform.jsp">Companyuser_regform</a><br>
         <a href="Generaluser_regform.jsp">Generaluser_regform</a><br>
@@ -29,6 +30,5 @@
 
         <jsp:forward page="main.jsp"/>
 
-        </body>
-    </html>
-     
+    </body>
+</html>
