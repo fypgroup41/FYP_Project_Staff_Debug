@@ -23,15 +23,20 @@ public class DeleteServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String table_type = null;
         String item_id = null;
+        String activities_id = null;
+        String timetable_id = null;
         try {
             table_type = request.getParameter("table_type");
 
             if (table_type.equals("activities")) {
-                item_id = request.getParameter("item_id");
-                Boolean a = db_select.delRecordBySql("DELETE FROM atype_a WHERE activitiesID='" + item_id + "'");
-                Boolean b = db_select.delRecordBySql("DELETE FROM ACTIVITIES WHERE activitiesID='" + item_id + "'");
-                
+                activities_id = request.getParameter("activities_id");
+
+                Boolean a = db_select.delRecordBySql("DELETE FROM atype_a WHERE activitiesID='" + activities_id + "'");
+                Boolean b = db_select.delRecordBySql("DELETE FROM ACTIVITIES WHERE activitiesID='" + activities_id + "'");
+
                 request.setAttribute("status", "Delete Success");
+                request.setAttribute("link", "activities.jsp");
+
                 RequestDispatcher rd
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
@@ -39,8 +44,23 @@ public class DeleteServlet extends HttpServlet {
 
             if (table_type.equals("activityBudget")) {
                 item_id = request.getParameter("item_id");
+                activities_id = request.getParameter("activities_id");
+
                 Boolean a = db_select.delRecordBySql("DELETE FROM activitybudget WHERE itemID='" + item_id + "'");
                 request.setAttribute("status", "Delete Success");
+                request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&activities_id=" + activities_id);
+                RequestDispatcher rd
+                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                rd.forward(request, response);
+            }
+
+            if (table_type.equals("activityTimetable")) {
+                timetable_id = request.getParameter("timetable_id");
+                activities_id = request.getParameter("activities_id");
+
+                Boolean a = db_select.delRecordBySql("DELETE FROM activityTimetable WHERE activityTimeTableID='" + timetable_id + "'");
+                request.setAttribute("status", "Delete Success");
+                request.setAttribute("link", "activitiyTimetable.jsp?activities_id=" + activities_id);
                 RequestDispatcher rd
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);

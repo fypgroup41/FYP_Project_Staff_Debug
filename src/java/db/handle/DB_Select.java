@@ -391,6 +391,35 @@ public class DB_Select {
         return newAvaildID + "";
     }
 
+    public String getAvailTimeTableID() {
+        Connection cnnct = null;
+        boolean isSuccess = false;
+        SimpleDateFormat formatter = null;
+        java.util.Date utilDate = null;
+        ResultSet rs = null;
+        String maxID = null;
+        int newAvaildID = -1;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "select activityTimeTableID from activitytimetable ORDER BY CAST(activityTimeTableID AS SIGNED) DESC LIMIT 1";
+            PreparedStatement pStmnt = cnnct.prepareStatement(preQueryStatement);
+            rs = pStmnt.executeQuery();
+            while (rs.next()) {
+                maxID = rs.getString(1);
+            }
+            newAvaildID = Integer.parseInt(maxID) + 1;
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return newAvaildID + "";
+    }
+
     public boolean addGeneralUser_User(String availdID, String userName, String password, String availMemberID, String givenName, String surName, String gender, String tel, String chinese, String email, int isAuthenticated) throws ParseException, IOException {
         PreparedStatement pStmnt = null;
         Connection cnnct = null;
@@ -565,7 +594,7 @@ public class DB_Select {
                 pStmnt = cnnct.prepareStatement(preQueryStatement);
                 rs = pStmnt.executeQuery();
                 while (rs.next()) {
-                    ActivityTimetableBean activityTimetable = new ActivityTimetableBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                    ActivityTimetableBean activityTimetable = new ActivityTimetableBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4).substring(0, rs.getString(4).length() - 2), rs.getString(5).substring(0, rs.getString(5).length() - 2));
 
                     list.add(activityTimetable);
                 }

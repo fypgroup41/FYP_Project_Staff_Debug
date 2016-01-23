@@ -44,7 +44,7 @@
 
         <%            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             UserBean user = (UserBean) session.getAttribute("userInfo");
-               ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("actID") + "\"");
+            ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("actID") + "\"");
             for (int i = 0; i < aryData.size(); i++) {
                 ActivitiesBean act = (ActivitiesBean) aryData.get(i);
         %>
@@ -63,7 +63,7 @@
 
         <form method="post" action="updateServlet">
             <input type="hidden" name="table_type" value="activities") >
-            <input type="hidden" name="item_id" value="<%=act.getActivitiesID()%>">
+            <input type="hidden" name="activities_id" value="<%=act.getActivitiesID()%>">
             <table  align="center" >
 
                 <tr><td>ActivitiesID</td><td><%=act.getActivitiesID()%></td></tr>
@@ -122,9 +122,10 @@
 
 
 
-            <a href="activitiesEdit.jsp?table_type=activities&item_id=<%=act.getActivitiesID()%>">Update Link</a>
-            <a href="deleteServlet?table_type=activities&item_id=<%=act.getActivitiesID()%>">Delete Link</a>
-            <a href="activitiesBudget.jsp?table_type=activities&item_id=<%=act.getActivitiesID()%>">Budget Link</a>
+            <a href="activitiesEdit.jsp?activities_id=<%=act.getActivitiesID()%>">Update Link</a>
+            <a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>">Delete Link</a>
+            <a href="activitiesBudget.jsp?activities_id=<%=act.getActivitiesID()%>">Budget Link</a>
+            <a href="activitiyTimetable.jsp?activities_id=<%=act.getActivitiesID()%>">Budget Link</a>
 
 
 

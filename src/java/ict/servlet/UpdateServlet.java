@@ -27,7 +27,7 @@ public class UpdateServlet extends HttpServlet {
             table_type = request.getParameter("table_type");
 
             if (table_type.equals("activities")) {
-                String item_id = null;
+                String activities_id = null;
                 String name = null;
                 String districtNo = null;
                 String quota = null;
@@ -41,7 +41,7 @@ public class UpdateServlet extends HttpServlet {
                 String description = null;
 
                 activityType = request.getParameter("activityType");
-                item_id = request.getParameter("item_id");
+                activities_id = request.getParameter("activities_id");
                 name = request.getParameter("name");
                 districtNo = request.getParameter("districtNo");
                 quota = request.getParameter("quota");
@@ -52,12 +52,12 @@ public class UpdateServlet extends HttpServlet {
                 date = request.getParameter("date");
                 tag = request.getParameter("tag");
                 description = request.getParameter("description");
-                String sql = " UPDATE ACTIVITIES SET name ='" + name + "'  ,districtNo='" + districtNo + "'  , quota='" + quota + "'  ,targetAgeMax=" + targetAgeMax + "  ,targetAgeMin=" + targetAgeMin + "  ,deadline='" + deadline + "'  ,venue='" + venue + "'  ,date='" + date + "'  ,tag='" + tag + "'  ,description='" + description + "'  WHERE activitiesID='" + item_id + "'";
+                String sql = " UPDATE ACTIVITIES SET name ='" + name + "'  ,districtNo='" + districtNo + "'  , quota='" + quota + "'  ,targetAgeMax=" + targetAgeMax + "  ,targetAgeMin=" + targetAgeMin + "  ,deadline='" + deadline + "'  ,venue='" + venue + "'  ,date='" + date + "'  ,tag='" + tag + "'  ,description='" + description + "'  WHERE activitiesID='" + activities_id + "'";
                 boolean isSuccess = db_select.editRecordBySql(sql);
-                sql = " UPDATE ATYPE_A SET activityTypeID='" + activityType + "' WHERE activitiesID='" + item_id + "'";
+                sql = " UPDATE ATYPE_A SET activityTypeID='" + activityType + "' WHERE activitiesID='" + activities_id + "'";
                 isSuccess = db_select.editRecordBySql(sql);
                 request.setAttribute("status", "Update Success");
-                request.setAttribute("link", "activitiesDetail.jsp?actID=" + item_id);
+                request.setAttribute("link", "activitiesDetail.jsp?actID=" + activities_id);
                 RequestDispatcher rd
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
@@ -82,7 +82,27 @@ public class UpdateServlet extends HttpServlet {
                 String sql = " UPDATE ACTIVITYBUDGET SET  itemName='" + itemName + "', itemType='" + itemType + "', cost=" + cost + ",number=" + number + " ,remark='" + remark + "' WHERE itemID='" + item_id + "'";
                 boolean isSuccess = db_select.editRecordBySql(sql);
                 request.setAttribute("status", "Update Success");
-                request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&item_id=" + activities_id);
+                request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&activities_id=" + activities_id);
+                RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                rd.forward(request, response);
+            }
+
+            if (table_type.equals("activityTimetable")) {
+                String activityTimeTableID = null;
+                String activities_id = null;
+                String detail = null;
+                String startTime = null;
+                String finish = null;
+
+                activityTimeTableID = request.getParameter("activityTimeTableID");
+                activities_id = request.getParameter("activities_id");
+                detail = request.getParameter("detail");
+                startTime = request.getParameter("startTime");
+                finish = request.getParameter("finish");
+                String sql = " UPDATE ACTIVITYTIMETABLE SET  detail='" + detail + "', startTime='" + startTime + "', finish='" + finish + "' where activityTimeTableID='" + activityTimeTableID + "'";
+                boolean isSuccess = db_select.editRecordBySql(sql);
+                request.setAttribute("status", sql);
+                request.setAttribute("link", "activitiyTimetable.jsp?activities_id="+activities_id);
                 RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
             }

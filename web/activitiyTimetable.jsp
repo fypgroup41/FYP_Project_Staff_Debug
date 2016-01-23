@@ -4,6 +4,7 @@
     Author     : test
 --%>
 
+<%@page import="db.bean.ActivityTimetableBean"%>
 <%@page import="db.bean.ActivityBudgetBean"%>
 <%@page import="ict.caculate.DateCalculate"%>
 <%@page import="db.bean.MemberBean"%>
@@ -42,43 +43,37 @@
 
 
         %>
-        <a href="activitiesBudgetInsert.jsp?activities_id=<%=request.getParameter("activities_id")%>">Insert</a>
+
         <table border="1">
-            <tr><th>Item ID</th><th>Item Name</th><th>Item Type</th><th>Cost </th><th>Qty</th><th>Remark</th></tr>
-                    <%
-                        double budget = 0;
-                        ArrayList activityBudget = db_select.queryListAll("activityBudget", " where activitiesID='" + request.getParameter("activities_id") + "'");
-                        for (int j = 0; j < activityBudget.size(); j++) {
-                            ActivityBudgetBean activityBudget_val = (ActivityBudgetBean) activityBudget.get(j);
+            <tr><th>TimeTable ID</th><th>Description</th><th>Start Time</th><th>End Time </th><th></th></tr>
+                    <%                        double budget = 0;
+                        ArrayList activityTimetable = db_select.queryListAll("activityTimetable", " where activitiesID='" + request.getParameter("activities_id") + "' order by startTime");
+                        for (int j = 0; j < activityTimetable.size(); j++) {
+                            ActivityTimetableBean activityTimetable_val = (ActivityTimetableBean) activityTimetable.get(j);
                     %>
-
             <tr>
+                <td><%=activityTimetable_val.getActivityTimeTableID()%></td>
+                <td><%=activityTimetable_val.getDetail()%></td>
+                <td><%=activityTimetable_val.getStartTime()%></td>
+                <td><%=activityTimetable_val.getFinish()%></td>
+                <td>
+                    <a href="activitiyTimetableEdit.jsp?timetable_id=<%=activityTimetable_val.getActivityTimeTableID()%>">Edit</a>
+                    <a href="deleteServlet?table_type=activityTimetable&activities_id=<%=request.getParameter("activities_id")%>&timetable_id=<%=activityTimetable_val.getActivityTimeTableID()%>">Delete</a>
 
-                <td><%=activityBudget_val.getItemID()%></td>
-                <td><%=activityBudget_val.getItemName()%></td>
-                <td><%=activityBudget_val.getItemType()%></td>
-                <td>$ <%=activityBudget_val.getCost()%></td>
-                <td><%=activityBudget_val.getNumber()%></td>
-                <td><%=activityBudget_val.getRemark()%></td>
-                <%
-                    budget += activityBudget_val.getCost() * activityBudget_val.getNumber();
-                %>
-                <td>$ <%=activityBudget_val.getCost() * activityBudget_val.getNumber()%></td>
-                <td><a href="budgetEdit.jsp?item_id=<%=activityBudget_val.getItemID()%>&activities_id=<%=request.getParameter("activities_id")%>">Edit</a></td>
-                <td><a href="deleteServlet?table_type=activityBudget&item_id=<%=activityBudget_val.getItemID()%>&activities_id=<%=request.getParameter("activities_id")%>">Delete</a>
+
+                </td>
+
 
                 </td>
             </tr>
-            
-            
+
+
             <%
                 }
             %>
-            <tr><td></td><td></td><td></td><td></td><td></td><td></td><td>  $ <%=budget%></td></tr>
-          
-            
-        </table>
 
+
+        </table>
     </body>
 </html>
 

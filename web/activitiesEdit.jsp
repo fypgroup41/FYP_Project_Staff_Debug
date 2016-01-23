@@ -39,14 +39,14 @@
             DB_Select db_select = new DB_Select(dbUrl, dbUser, dbPassword);
             ArrayList district_data = db_select.queryDistrict();
             ArrayList activityType = db_select.queryListAll("activityType", "");
-            ArrayList activityTypeActivities = db_select.queryListAll("atype_A", " where activitiesID='" + request.getParameter("item_id") + "'");
+            ArrayList activityTypeActivities = db_select.queryListAll("atype_A", " where activitiesID='" + request.getParameter("activities_id") + "'");
         %>
 
         <%            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             UserBean user = (UserBean) session.getAttribute("userInfo");
             //ArrayList aryData = db_select.queryActivitiesBySql("SELECT * FROM activities where activitiesID=\"" + request.getParameter("actID") + "\"");
 
-            ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("item_id") + "\"");
+            ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("activities_id") + "\"");
             for (int i = 0; i < aryData.size(); i++) {
                 ActivitiesBean act = (ActivitiesBean) aryData.get(i);
         %>
@@ -63,7 +63,7 @@
 
         <form method="post" action="updateServlet">
             <input type="hidden" name="table_type" value="activities") >
-            <input type="hidden" name="item_id" value="<%=act.getActivitiesID()%>">
+            <input type="hidden" name="activities_id" value="<%=act.getActivitiesID()%>">
             <table  align="center" >
 
                 <tr><td>ActivitiesID</td><td><%=act.getActivitiesID()%></td></tr>
@@ -135,7 +135,7 @@
 
 
         
-            <a href="deleteServlet?table_type=activities&item_id=<%=act.getActivitiesID()%>">Delete Link</a>
+            <a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>">Delete Link</a>
 
 
 
