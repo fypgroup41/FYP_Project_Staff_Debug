@@ -74,6 +74,8 @@
 
 
         </table>
+
+        <a href="activitiyTimetableInsert.jsp?activities_id=<%=request.getParameter("activities_id")%>">Insert</a>
     </body>
 </html>
 

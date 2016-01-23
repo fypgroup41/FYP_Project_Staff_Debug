@@ -46,7 +46,7 @@
 
 
         <form method="post" action="insertServlet">
-            <input type="text" name="activities_id" value="<%=request.getParameter("activities_id")%>">
+            <input type="hidden" name="activities_id" value="<%=request.getParameter("activities_id")%>">
             <table border="1">
                 <input type="hidden" name="table_type" value="activityTimetable" >                          
                 <tr><td>detail</td><td><input type="text" name="detail" value=""></td></tr>
