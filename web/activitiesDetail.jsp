@@ -125,7 +125,7 @@
             <a href="activitiesEdit.jsp?activities_id=<%=act.getActivitiesID()%>">Update Link</a>
             <a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>">Delete Link</a>
             <a href="activitiesBudget.jsp?activities_id=<%=act.getActivitiesID()%>">Budget Link</a>
-            <a href="activitiyTimetable.jsp?activities_id=<%=act.getActivitiesID()%>">Budget Link</a>
+            <a href="activitiyTimetable.jsp?activities_id=<%=act.getActivitiesID()%>">TimeTable Link</a>
 
 
 

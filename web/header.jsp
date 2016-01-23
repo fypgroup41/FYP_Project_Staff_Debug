@@ -6,7 +6,6 @@
         <ul class="nav navbar-nav">
             
             <li id="activities"><a href="activities.jsp">Activities</a></li>
-            <li><a href="#">Community Center</a></li>
             <li><a href="#">Survey</a></li>
             <li><a href="#">Personal Setting</a></li>
 

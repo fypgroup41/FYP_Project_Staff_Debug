@@ -101,7 +101,7 @@ public class InsertServlet extends HttpServlet {
                 String sql = "INSERT INTO `activitytimetable` (`activityTimeTableID`, `activitiesID`, `detail`, `startTime`, `finish`) VALUES ('" + validID + "', '" + activities_id + "', '" + detail + "', '" + startTime + "', '" + finish + "');";
                 boolean isSuccess = db_select.editRecordBySql(sql);
                 request.setAttribute("status", "Insert Success");
-                request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&activities_id=" + activities_id);
+                request.setAttribute("link", "activitiyTimetable.jsp?activities_id=" + activities_id);
                 RequestDispatcher rd
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);

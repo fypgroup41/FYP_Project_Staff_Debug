@@ -29,7 +29,6 @@
                                     return false;
                                 }
                             }
-
                             function LoadDateTime() {
                                 var year = document.getElementById("year");
                                 var month = document.getElementById("month");
@@ -40,14 +39,9 @@
                                     option.text = i + "";
                                     year.add(option);
                                 }
-
                             }
                         </script>
-
                         <style>
-
-
-
                         </style>
                         </head>
                         <body>
@@ -117,35 +111,35 @@
                                         <div id="collapseTwo" class="panel-collapse collapse">
                                             <div class="panel-body">
 
-                                               
 
 
+
+                                                <br />
+
+                                                <h3>Address</h3>
+                                                <p>
+                                                    <label for="add_room">Flat/Room, Floor, Block   </label>
+                                                    <input type="text" name="add_room" placeholder="e.g. Flat 401, 4/F, Block 2" size="20" />
+                                                    <br />
+                                                    <label for="street">Garden/Mansion/Estate, Road/Street/Avenue  </label><input type="text" name="street" size="20" placeholder="e.g. Hong Kong Estate, 1 Central Street"/>
+                                                    <br />
+                                                    <label for="district">District: </label><input type="text" name="district" size="10" placeholder="e.g. Central" />
                                                     <br />
 
-                                                    <h3>Address</h3>
-                                                    <p>
-                                                        <label for="add_room">Flat/Room, Floor, Block   </label>
-                                                        <input type="text" name="add_room" placeholder="e.g. Flat 401, 4/F, Block 2" size="20" />
-                                                        <br />
-                                                        <label for="street">Garden/Mansion/Estate, Road/Street/Avenue  </label><input type="text" name="street" size="20" placeholder="e.g. Hong Kong Estate, 1 Central Street"/>
-                                                        <br />
-                                                        <label for="district">District: </label><input type="text" name="district" size="10" placeholder="e.g. Central" />
-                                                        <br />
-
-                                                        <label for="location">Location</label><br/>
-                                                        <select name="location">
-                                                            <option selected="selected">(Please select a location)</option>
-                                                            <option>Hong Kong Island</option>
-                                                            <option>Kowloon</option>
-                                                            <option>New Territories and Islands District</option>
-                                                        </select><br/>
-                                                    </p>
-                                                    <h3>Parent</h3>
-                                                    <p>
-                                                        <label for="parent">Parent Name: </label>  <input type="text" name="parent" placeholder="e.g. Chan Tai Tai" maxlength="50" /><br />
-                                                        <label for="relation">Relation:  </label>   <input type="text" name="relation" placeholder="e.g. Father" maxlength="10" /><br />
-                                                        <label for="surname">Emergency Call: </label>   <input type="text" name="surname" placeholder="e.g. 94567891" maxlength="30" /><br />
-                                                    </p>
+                                                    <label for="location">Location</label><br/>
+                                                    <select name="location">
+                                                        <option selected="selected">(Please select a location)</option>
+                                                        <option>Hong Kong Island</option>
+                                                        <option>Kowloon</option>
+                                                        <option>New Territories and Islands District</option>
+                                                    </select><br/>
+                                                </p>
+                                                <h3>Parent</h3>
+                                                <p>
+                                                    <label for="parent">Parent Name: </label>  <input type="text" name="parent" placeholder="e.g. Chan Tai Tai" maxlength="50" /><br />
+                                                    <label for="relation">Relation:  </label>   <input type="text" name="relation" placeholder="e.g. Father" maxlength="10" /><br />
+                                                    <label for="surname">Emergency Call: </label>   <input type="text" name="surname" placeholder="e.g. 94567891" maxlength="30" /><br />
+                                                </p>
 
                                             </div>
                                         </div>
