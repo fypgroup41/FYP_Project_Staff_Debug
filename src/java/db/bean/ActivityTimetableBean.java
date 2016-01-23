@@ -11,23 +11,23 @@ import java.io.Serializable;
  *
  * @author test
  */
-public class ActivityTimetableBean implements Serializable{
+public class ActivityTimetableBean implements Serializable {
 
     String activityTimeTableID;
     String activitiesID;
     String detail;
     String startTime;
-    String finish;
+    String finishTime;
 
     public ActivityTimetableBean() {
     }
 
-    public ActivityTimetableBean(String activityTimeTableID, String activitiesID, String detail, String startTime, String finish) {
+    public ActivityTimetableBean(String activityTimeTableID, String activitiesID, String detail, String startTime, String finishTime) {
         this.activityTimeTableID = activityTimeTableID;
         this.activitiesID = activitiesID;
         this.detail = detail;
         this.startTime = startTime;
-        this.finish = finish;
+        this.finishTime = finishTime;
     }
 
     public String getActivityTimeTableID() {
@@ -62,12 +62,12 @@ public class ActivityTimetableBean implements Serializable{
         this.startTime = startTime;
     }
 
-    public String getFinish() {
-        return finish;
+    public String getFinishTime() {
+        return finishTime;
     }
 
-    public void setFinish(String finish) {
-        this.finish = finish;
+    public void setFinishTime(String finishTime) {
+        this.finishTime = finishTime;
     }
 
 }
