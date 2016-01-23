@@ -57,6 +57,7 @@ public class UpdateServlet extends HttpServlet {
                 sql = " UPDATE ATYPE_A SET activityTypeID='" + activityType + "' WHERE activitiesID='" + item_id + "'";
                 isSuccess = db_select.editRecordBySql(sql);
                 request.setAttribute("status", "Update Success");
+                request.setAttribute("link", "activitiesDetail.jsp?actID=" + item_id);
                 RequestDispatcher rd
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
@@ -80,8 +81,9 @@ public class UpdateServlet extends HttpServlet {
                 activities_id = request.getParameter("activities_id");
                 String sql = " UPDATE ACTIVITYBUDGET SET  itemName='" + itemName + "', itemType='" + itemType + "', cost=" + cost + ",number=" + number + " ,remark='" + remark + "' WHERE itemID='" + item_id + "'";
                 boolean isSuccess = db_select.editRecordBySql(sql);
-                request.setAttribute("status","Update Success" );
-                RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/activitiesBudget.jsp?table_type=activities&item_id=" + activities_id);
+                request.setAttribute("status", "Update Success");
+                request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&item_id=" + activities_id);
+                RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
             }
 

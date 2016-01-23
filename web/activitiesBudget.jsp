@@ -42,7 +42,7 @@
 
 
         %>
-
+        <a href="activitiesBudgetInsert.jsp?activities_id=<%=request.getParameter("item_id")%>">Insert</a>
         <table border="1">
             <tr><th>Item ID</th><th>Item Name</th><th>Item Type</th><th>Cost </th><th>Number</th><th>Remark</th></tr>
                     <%            ArrayList activityBudget = db_select.queryListAll("activityBudget", " where activitiesID='" + request.getParameter("item_id") + "'");
@@ -59,7 +59,9 @@
                 <td><%=activityBudget_val.getNumber()%></td>
                 <td><%=activityBudget_val.getRemark()%></td>
                 <td><a href="budgetEdit.jsp?item_id=<%=activityBudget_val.getItemID()%>&activities_id=<%=request.getParameter("item_id")%>">Edit</a></td>
-                <td><a href="deleteServlet?table_type=activityBudget&item_id=<%=activityBudget_val.getItemID()%>">Delete</a></td>
+                <td><a href="deleteServlet?table_type=activityBudget&item_id=<%=activityBudget_val.getItemID()%>">Delete</a>
+
+                </td>
             </tr>
             <%
                 }

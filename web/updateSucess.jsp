@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="refresh" content="2;url=main.jsp" />
+        <meta http-equiv="refresh" content="2;url=<%=request.getAttribute("link")%>" />
         <title>JSP Page</title>
     </head>
     <body>

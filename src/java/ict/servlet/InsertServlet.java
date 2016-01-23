@@ -56,7 +56,31 @@ public class InsertServlet extends HttpServlet {
                 boolean isSuccess = db_select.editRecordBySql(sql);
                 sql = "INSERT INTO `atype_a` (`activityTypeID`, `activitiesID`) VALUES ('" + activityType + "', '" + validID + "')";
                 isSuccess = db_select.editRecordBySql(sql);
-                request.setAttribute("status", "Update Success");
+                request.setAttribute("status", "Insert Success");
+                request.setAttribute("link", "activities.jsp");
+                RequestDispatcher rd
+                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                rd.forward(request, response);
+            }
+            if (table_type.equals("activityBudget")) {
+
+                String itemName = null;
+                String itemType = null;
+                String cost = null;
+                String number = null;
+                String remark = null;
+                String activities_id = null;
+                activities_id = request.getParameter("activities_id");
+                itemName = request.getParameter("itemName");
+                itemType = request.getParameter("itemType");
+                cost = request.getParameter("cost");
+                number = request.getParameter("number");
+                remark = request.getParameter("remark");
+                String validID = db_select.getAvailBudgetItemID();
+                String sql = "INSERT INTO `activitybudget` (`itemID`, `activitiesID`, `itemName`, `itemType`, `cost`, `number`, `remark`) VALUES('" + validID + "', '" + activities_id + "', '" + itemName + "', '" + itemType + "', '" + cost + "', '" + number + "', '" + remark + "')";
+                boolean isSuccess = db_select.editRecordBySql(sql);
+                request.setAttribute("status", "Insert Success");
+                request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&item_id="+activities_id);
                 RequestDispatcher rd
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
                 rd.forward(request, response);
