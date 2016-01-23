@@ -32,7 +32,7 @@
 
             <table  align="center" >
 
-
+                <input type="hidden" name="table_type" value="activities") >
                 <tr><td>Name</td><td><input type="text" name="name" value="" size="35"></td></tr>
 
                 <tr><td>districtNo</td><td>       <select name="districtNo">

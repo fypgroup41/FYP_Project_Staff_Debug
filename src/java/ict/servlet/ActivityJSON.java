@@ -28,7 +28,7 @@ public class ActivityJSON extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            ArrayList aryData = db_select.queryActivitiesBySql("select * from activities where staffID=\""+request.getParameter("id")+"\"");
+            ArrayList aryData = db_select.queryActivitiesBySql("select * from activities where staffID=\"" + request.getParameter("id") + "\"");
             for (int i = 0; i < aryData.size(); i++) {
                 ActivitiesBean act = (ActivitiesBean) aryData.get(i);
                 response.setContentType("text/html;charset=UTF-8");
@@ -45,7 +45,6 @@ public class ActivityJSON extends HttpServlet {
                 jsonArray.add(9, act.getDate());
                 jsonArray.add(10, act.getTag());
                 jsonArray.add(11, act.getStaffID());
-                
                 jsonArray.add(12, act.getDescription());
                 jsonArray2.add(jsonArray);
             }
@@ -75,7 +74,7 @@ public class ActivityJSON extends HttpServlet {
             rd = getServletContext().getRequestDispatcher("/main.jsp");
             rd.forward(request, response);*/
         } catch (Exception ex) {
-   
+
             out.println(ex.getMessage());
         }
     }

@@ -30,7 +30,7 @@ public class DeleteServlet extends HttpServlet {
                 item_id = request.getParameter("item_id");
                 Boolean a = db_select.delRecordBySql("DELETE FROM atype_a WHERE activitiesID='" + item_id + "'");
                 Boolean b = db_select.delRecordBySql("DELETE FROM ACTIVITIES WHERE activitiesID='" + item_id + "'");
-
+                
                 request.setAttribute("status", "Delete Success");
                 RequestDispatcher rd
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");

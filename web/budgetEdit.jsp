@@ -24,13 +24,15 @@
         String dbUrl = this.getServletContext().getInitParameter("dbUrl");
         DB_Select db_select = new DB_Select(dbUrl, dbUser, dbPassword);
         String item_id = request.getParameter("item_id");
-        ArrayList activityBudget = db_select.queryListAll("activityBudget", " where itemID='" + request.getParameter("item_id")  + "'");
+        ArrayList activityBudget = db_select.queryListAll("activityBudget", " where itemID='" + request.getParameter("item_id") + "'");
 
         for (int i = 0; i < activityBudget.size(); i++) {
             ActivityBudgetBean activityBudget_val = (ActivityBudgetBean) activityBudget.get(i);
     %>
-          <form method="post" action="updateServlet">
+    <form method="post" action="updateServlet">
 
+
+        <input type="hidden" name="activities_id" value="<%=request.getParameter("activities_id")%>">
         <input type="hidden" name="table_type" value="activityBudget">
         <input type="hidden" name="item_id" value="<%=activityBudget_val.getItemID()%>">
 

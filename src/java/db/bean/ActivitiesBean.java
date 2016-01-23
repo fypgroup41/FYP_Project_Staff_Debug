@@ -33,7 +33,6 @@ public class ActivitiesBean {
         this.date = date;
         this.tag = tag;
         this.staffID = staffID;
-
         this.description = description;
     }
 

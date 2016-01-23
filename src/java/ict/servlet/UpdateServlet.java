@@ -39,6 +39,7 @@ public class UpdateServlet extends HttpServlet {
                 String tag = null;
                 String activityType = null;
                 String description = null;
+
                 activityType = request.getParameter("activityType");
                 item_id = request.getParameter("item_id");
                 name = request.getParameter("name");
@@ -63,6 +64,7 @@ public class UpdateServlet extends HttpServlet {
             }
 
             if (table_type.equals("activityBudget")) {
+                String activities_id = null;
                 String item_id = null;
                 String itemName = null;
                 String itemType = null;
@@ -75,11 +77,11 @@ public class UpdateServlet extends HttpServlet {
                 cost = request.getParameter("cost");
                 number = request.getParameter("number");
                 remark = request.getParameter("remark");
+                activities_id = request.getParameter("activities_id");
                 String sql = " UPDATE ACTIVITYBUDGET SET  itemName='" + itemName + "', itemType='" + itemType + "', cost=" + cost + ",number=" + number + " ,remark='" + remark + "' WHERE itemID='" + item_id + "'";
                 boolean isSuccess = db_select.editRecordBySql(sql);
-                request.setAttribute("status", "Update Success");
-                RequestDispatcher rd
-                        = request.getServletContext().getRequestDispatcher("/activitiesBudget.jsp");
+                request.setAttribute("status","Update Success" );
+                RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/activitiesBudget.jsp?table_type=activities&item_id=" + activities_id);
                 rd.forward(request, response);
             }
 

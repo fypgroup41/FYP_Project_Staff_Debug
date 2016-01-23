@@ -25,7 +25,6 @@ public class InsertServlet extends HttpServlet {
 
             String table_type = null;
             table_type = request.getParameter("table_type");
-
             if (table_type.equals("activities")) {
                 String item_id = null;
                 String name = null;
@@ -51,35 +50,15 @@ public class InsertServlet extends HttpServlet {
                 date = request.getParameter("date");
                 tag = request.getParameter("tag");
                 description = request.getParameter("description");
-                String sql = " INSERT INTO `activities` (`activitiesID`, `name`, `districtNo`, `quota`, `remain`, `targetAgeMax`, `targetAgeMin`, `deadline`, `venue`, `date`, `tag`, `staffID`, `sqID`, `description`) VALUES ('92', 'Activity9aaa', '4', '24', '17', '65', '32', '2016-09-25 17:00:00', 'Sham Shui Po District - 417', '2016-10-25 01:07:00', '#aerobic, #sport', '10', '1', 'Activity9 ... to be coming soon.....')";
+                String validID = db_select.getAvailActivitiesID();
+                String sql = " INSERT INTO `activities` (`activitiesID`, `name`, `districtNo`, `quota`, `remain`, `targetAgeMax`, `targetAgeMin`, `deadline`, `venue`, `date`, `tag`, `staffID`, `description`) VALUES ('" + validID + "', '" + name + "', '" + districtNo + "', '" + quota + "', '" + quota + "', '" + targetAgeMax + "', '" + targetAgeMin + "', '" + deadline + "', '" + venue + "', '" + date + "', '" + tag + "', '" + "10"
+                        + "', '" + description + "')";
                 boolean isSuccess = db_select.editRecordBySql(sql);
-                sql = " UPDATE ATYPE_A SET activityTypeID='" + activityType + "' WHERE activitiesID='" + item_id + "'";
+                sql = "INSERT INTO `atype_a` (`activityTypeID`, `activitiesID`) VALUES ('" + activityType + "', '" + validID + "')";
                 isSuccess = db_select.editRecordBySql(sql);
                 request.setAttribute("status", "Update Success");
                 RequestDispatcher rd
                         = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-                rd.forward(request, response);
-
-            }
-
-            if (table_type.equals("activityBudget")) {
-                String item_id = null;
-                String itemName = null;
-                String itemType = null;
-                String cost = null;
-                String number = null;
-                String remark = null;
-                item_id = request.getParameter("item_id");
-                itemName = request.getParameter("itemName");
-                itemType = request.getParameter("itemType");
-                cost = request.getParameter("cost");
-                number = request.getParameter("number");
-                remark = request.getParameter("remark");
-                String sql = " UPDATE ACTIVITYBUDGET SET  itemName='" + itemName + "', itemType='" + itemType + "', cost=" + cost + ",number=" + number + " ,remark='" + remark + "' WHERE itemID='" + item_id + "'";
-                boolean isSuccess = db_select.editRecordBySql(sql);
-                request.setAttribute("status", "Update Success");
-                RequestDispatcher rd
-                        = request.getServletContext().getRequestDispatcher("/activitiesBudget.jsp");
                 rd.forward(request, response);
             }
 

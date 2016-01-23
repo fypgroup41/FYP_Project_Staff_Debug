@@ -71,6 +71,6 @@
     <body>
         <jsp:include page="/header.jsp"/>
         <table id="example" class="display" width="100%"></table>
-
+        <a href="actvitiesInsert.jsp">Insert Activities</a>
     </body>
 </html>

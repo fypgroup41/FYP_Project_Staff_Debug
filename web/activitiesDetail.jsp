@@ -41,12 +41,10 @@
             ArrayList activityType = db_select.queryListAll("activityType", "");
             ArrayList activityTypeActivities = db_select.queryListAll("atype_A", " where activitiesID='" + request.getParameter("actID") + "'");
         %>
-        
+
         <%            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             UserBean user = (UserBean) session.getAttribute("userInfo");
-            //ArrayList aryData = db_select.queryActivitiesBySql("SELECT * FROM activities where activitiesID=\"" + request.getParameter("actID") + "\"");
-
-            ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("actID") + "\"");
+               ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("actID") + "\"");
             for (int i = 0; i < aryData.size(); i++) {
                 ActivitiesBean act = (ActivitiesBean) aryData.get(i);
         %>
@@ -69,64 +67,51 @@
             <table  align="center" >
 
                 <tr><td>ActivitiesID</td><td><%=act.getActivitiesID()%></td></tr>
-                <tr><td>Name</td><td><input type="text" name="name" value="<%=act.getName()%>" size="35"></td></tr>
+                <tr><td>Name</td><td><%=act.getName()%></td></tr>
 
-                <tr><td>districtNo</td><td>       <select name="districtNo">
-                            <%          for (int j = 0; j < district_data.size(); j++) {
-                                    DistrictBean district = (DistrictBean) district_data.get(j);
-                            %>
-                            <% if (!act.getDistrictNo().toString().equals(district.getDistrictID().toString())) {%>
-                            <option value="<%=district.getDistrictID()%>"><%=district.getName()%></option>
-                            <% } else {%>
-                            <option value="<%=district.getDistrictID()%>" selected><%=district.getName()%></option>
-                            <%   }
-                                }
+                <tr><td>districtNo</td><td>     
+                        <%          for (int j = 0; j < district_data.size(); j++) {
+                                DistrictBean district = (DistrictBean) district_data.get(j);
+                        %>
+                        <% if (act.getDistrictNo().toString().equals(district.getDistrictID().toString())) {%>
+                        <%=district.getName()%>
+                        <% } else {%>
 
-                            %>
-                        </select></td></tr>
-                <tr><td>quota</td><td><input type="text" name="quota" value="<%=act.getQuota()%>" size="35" min="0"></td></tr>
+                        <%   }
+                            }
+
+                        %>
+                    </td></tr>
+                <tr><td>quota</td><td><%=act.getQuota()%></td></tr>
 
                 <tr><td>targetAgeMax</td><td>
-                        <input type="range" style="width:auto;display: initial;" name="targetAgeMax"  value="<%=act.getTargetAgeMax()%>"  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show"><%=act.getTargetAgeMax()%></span>
-                        <script type="text/javascript">
-                            function targetAgeMax_show(newValue)
-                            {
-                                document.getElementById("targetAgeMax_show").innerHTML = newValue;
-                            }
-                        </script>
+                        <%=act.getTargetAgeMax()%>
                     </td></tr>
-                <tr><td>targetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="targetAgeMin" value="<%=act.getTargetAgeMin()%>" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show"><%=act.getTargetAgeMin()%></span>
-                        <script type="text/javascript">
-                            function targetAgeMin_show(newValue)
-                            {
-                                document.getElementById("targetAgeMin_show").innerHTML = newValue;
-                            }
-                        </script>
-
+                <tr><td>targetAgeMin</td><td><%=act.getTargetAgeMin()%>
                     </td></tr>
-                <tr><td>deadline</td><td><input type="text" name="deadline" value="<%=act.getDeadline()%>" size="35"></td></tr>
-                <tr><td>venue</td><td><input type="text" name="venue" value="<%=act.getVenue()%>" size="35"></td></tr>
-                <tr><td>date</td><td><input type="text" name="date" value="<%=act.getDate()%>" size="35"></td></tr>
-                <tr><td>tag</td><td><input type="text" name="tag" value="<%=act.getTag()%>" size="35"></td></tr>
-                <tr><td>description</td><td><textarea name="description" ><%=act.getDescription()%></textarea></td></tr>
-                <tr><td>districtNo</td><td>       <select name="activityType">
-                            <%
-                                Atype_ABean activityTypeActivities_val = (Atype_ABean) activityTypeActivities.get(0);
-                                for (int j = 0; j < activityType.size(); j++) {
-                                    ActivityTypeBean activityType_val = (ActivityTypeBean) activityType.get(j);
-                            %>
-                            <% if (!activityType_val.getActivityTypeID().toString().equals(activityTypeActivities_val.getActivityTypeID().toString())) {%>
-                            <option value="<%=activityType_val.getActivityTypeID()%>"><%=activityType_val.getTypeName()%></option>
-                            <% } else {%>
-                            <option value="<%=activityType_val.getActivityTypeID()%>" selected><%=activityType_val.getTypeName()%></option>
-                            <%   }
-                                }
+                <tr><td>deadline</td><td><%=act.getDeadline()%></td></tr>
+                <tr><td>venue</td><td><%=act.getVenue()%></td></tr>
+                <tr><td>date</td><td><%=act.getDate()%></td></tr>
+                <tr><td>tag</td><td><%=act.getTag()%></td></tr>
+                <tr><td>description</td><td><%=act.getDescription()%></td></tr>
+                <tr><td>districtNo</td><td>   
+                        <%
+                            Atype_ABean activityTypeActivities_val = (Atype_ABean) activityTypeActivities.get(0);
+                            for (int j = 0; j < activityType.size(); j++) {
+                                ActivityTypeBean activityType_val = (ActivityTypeBean) activityType.get(j);
+                        %>
+                        <% if (!activityType_val.getActivityTypeID().toString().equals(activityTypeActivities_val.getActivityTypeID().toString())) {%>
 
-                            %>
-                        </select></td></tr>                
+                        <% } else {%>
+                        <%=activityType_val.getTypeName()%>
+                        <%   }
+                            }
+
+                        %>
+                    </td></tr>                
 
 
-                <tr><td>       <br><br>    <input type="submit" value="Update"></td><td></td></tr>
+
 
 
 
@@ -137,8 +122,9 @@
 
 
 
-
+            <a href="activitiesEdit.jsp?table_type=activities&item_id=<%=act.getActivitiesID()%>">Update Link</a>
             <a href="deleteServlet?table_type=activities&item_id=<%=act.getActivitiesID()%>">Delete Link</a>
+            <a href="activitiesBudget.jsp?table_type=activities&item_id=<%=act.getActivitiesID()%>">Budget Link</a>
 
 
 

@@ -303,6 +303,35 @@ public class DB_Select {
         }
         return newAvaildID + "";
     }
+    
+    public String getAvailActivitiesID() {
+        Connection cnnct = null;
+        boolean isSuccess = false;
+        SimpleDateFormat formatter = null;
+        java.util.Date utilDate = null;
+        ResultSet rs = null;
+        String maxID = null;
+        int newAvaildID = -1;
+        try {
+            cnnct = getConnection();
+            String preQueryStatement = "select activitiesID from activities ORDER BY CAST(activitiesID AS SIGNED) DESC LIMIT 1";
+            PreparedStatement pStmnt = cnnct.prepareStatement(preQueryStatement);
+            rs = pStmnt.executeQuery();
+            while (rs.next()) {
+                maxID = rs.getString(1);
+            }
+            newAvaildID = Integer.parseInt(maxID) + 1;
+        } catch (SQLException ex) {
+            while (ex != null) {
+                ex.printStackTrace();
+                ex = ex.getNextException();
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return newAvaildID + "";
+    }
 
     public String getAvailUserID() {
         Connection cnnct = null;
@@ -674,7 +703,6 @@ public class DB_Select {
         try {
             Statement stmt = cnnct.createStatement();
             String update = sql;
-            stmt.executeUpdate(update);
             int i = stmt.executeUpdate(update);
             if (i >= 1) {
                 return true;
