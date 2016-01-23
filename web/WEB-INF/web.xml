@@ -61,4 +61,12 @@
         <servlet-name>deleteServlet</servlet-name>
         <url-pattern>/deleteServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>insertServlet</servlet-name>
+        <servlet-class>ict.servlet.InsertServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>insertServlet</servlet-name>
+        <url-pattern>/insertServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

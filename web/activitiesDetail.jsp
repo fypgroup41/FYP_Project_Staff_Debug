@@ -41,8 +41,7 @@
             ArrayList activityType = db_select.queryListAll("activityType", "");
             ArrayList activityTypeActivities = db_select.queryListAll("atype_A", " where activitiesID='" + request.getParameter("actID") + "'");
         %>
-
-
+        
         <%            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             UserBean user = (UserBean) session.getAttribute("userInfo");
             //ArrayList aryData = db_select.queryActivitiesBySql("SELECT * FROM activities where activitiesID=\"" + request.getParameter("actID") + "\"");
