@@ -18,17 +18,16 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="/sourceLink.jsp"/>
-        <jsp:include page="/header.jsp"/>
-        <a href="Companyuser_regform.jsp">Companyuser_regform</a><br>
-        <a href="Companyuser_regform.jsp">Companyuser_regform</a><br>
-        <a href="Generaluser_regform.jsp">Generaluser_regform</a><br>
-        <a href="Reg_Redirect.jsp">Reg_Redirect</a><br>
-        <a href="login.jsp">login</a><br>
-        <a href="main.jsp">main</a><br>
-        <a href="showTable.jsp">showTable</a><br>
+        <%
+            if (session.getAttribute("staffInfo") == null) {
+                String redirectURL = "login.jsp";
+                response.sendRedirect(redirectURL);
+            } else {
+                String redirectURL = "activities.jsp";
+                response.sendRedirect(redirectURL);
+            }
+        %>
 
-        <jsp:forward page="main.jsp"/>
 
     </body>
 </html>
