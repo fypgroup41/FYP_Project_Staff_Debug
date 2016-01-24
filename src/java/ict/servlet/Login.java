@@ -72,7 +72,7 @@ public class Login extends HttpServlet {
 
     private void doLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        response.sendRedirect(request.getContextPath() + ("/activities.jsp"));
+        response.sendRedirect(request.getContextPath() + ("/login.jsp"));
     }
 
     private void doLogout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {

@@ -5,17 +5,30 @@
 --%>
 
 
+<%@page import="db.bean.StaffBean"%>
+<%@page import="db.handle.DB_Select"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
 
         <jsp:include page="/sourceLink.jsp"/>
+
+
         <%
+            String dbUser = this.getServletContext().getInitParameter("dbUsername");
+            String dbPassword = this.getServletContext().getInitParameter("dbPassword");
+            String dbUrl = this.getServletContext().getInitParameter("dbUrl");
+            DB_Select db_select = new DB_Select(dbUrl, dbUser, dbPassword);
+
+            StaffBean staffInfo = null;
             if (session.getAttribute("staffInfo") == null) {
                 String redirectURL = "login.jsp";
                 response.sendRedirect(redirectURL);
+            } else {
+                staffInfo = (StaffBean) session.getAttribute("staffInfo");
             }
+
         %>
         <script>
             var dataSet;
@@ -24,7 +37,7 @@
                 $("#activities").addClass("active");
                 $.ajax({
                     type: "POST",
-                    data: "id=<%="1"%>",
+                    data: "id=<%=staffInfo.getStaffID()%>",
                     url: "activity_json",
                     success: function (data) {
                         var obj = jQuery.parseJSON(data);
@@ -76,7 +89,7 @@
         <title>JSP Page</title>
     <body>
         <jsp:include page="/header.jsp"/>
-        <table id="example" class="display" width="100%"></table>
-        <a href="actvitiesInsert.jsp">Insert Activities</a>
+                <a href="actvitiesInsert.jsp"><i class="fa fa-plus fa-2x"></i></a><table id="example" class="display" width="100%"></table>
+
     </body>
 </html>

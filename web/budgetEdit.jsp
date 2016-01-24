@@ -46,7 +46,7 @@
 
 
 
-            <table>
+            <table class="table">
 
 
                 <tr><td>ActivitiesID</td><td><%=activityBudget_val.getActivitiesID()%></td></tr>

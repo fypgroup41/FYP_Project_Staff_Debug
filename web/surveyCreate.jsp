@@ -33,8 +33,14 @@
                 String activities_id = null;
                 activities_id = request.getParameter("activities_id");
                 String sql = "INSERT INTO `survey` (`surveyID`, `activitiesID`) VALUES ('" + db_select.getAvailSurveyID() + "', '" + activities_id + "');";
-                boolean isSuccess = db_select.editRecordBySql(sql);
-
+                boolean check = db_select.editRecordBySql(sql);
+                if (check == true) {
+                    request.setAttribute("status", "Create Survey Success");
+                    request.setAttribute("link", "activities.jsp");
+                    RequestDispatcher rd
+                            = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
+                    rd.forward(request, response);
+                }
             }
         %>
     </body>

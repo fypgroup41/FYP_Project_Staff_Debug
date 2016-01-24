@@ -40,17 +40,26 @@ public class SurveyReceive extends HttpServlet {
                     }
                     val = val.substring(0, val.length() - 1);
                     String sql = "INSERT INTO `surveyanswer` (`saID`, `answer`, `sqID`, `memberID`) VALUES('" + db_select.getAvailSurveyAnswerID() + "', '" + val + "', '" + paramName + "', '" + memberID + "')";
-                    boolean isSuccess = db_select.editRecordBySql(sql);
+                    boolean check = db_select.editRecordBySql(sql);
+                    if (!check) {
+                        request.setAttribute("status", "Receive Error");
+                        request.setAttribute("link", "survey.jsp");
+                        RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                        rd.forward(request, response);
+                    }
                     request.setAttribute("status", "Receive Success");
                     request.setAttribute("link", "survey.jsp");
-                    RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
+                    RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
                     rd.forward(request, response);
                 }
 
             }
         } catch (Exception ex) {
-            PrintWriter out = response.getWriter();
-            out.println(ex.getMessage());
+            request.setAttribute("status", ex.getMessage());
+            request.setAttribute("link", "activities.jsp");
+            RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+            rd.forward(request, response);
+
         }
     }
 

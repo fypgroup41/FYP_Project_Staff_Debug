@@ -22,63 +22,138 @@ public class DeleteServlet extends HttpServlet {
         db_select = new DB_Select(dbUrl, dbUser, dbPassword);
         PrintWriter out = response.getWriter();
         String table_type = null;
-        String item_id = null;
-        String activities_id = null;
-        String timetable_id = null;
+
         try {
             table_type = request.getParameter("table_type");
 
-            if (table_type.equals("activities")) {
-                activities_id = request.getParameter("activities_id");
+            switch (table_type) {
+                case "activities": {
+                    String activities_id = null;
+                    activities_id = request.getParameter("activities_id");
+                    if (activities_id != null) {
+                        Boolean check1 = db_select.delRecordBySql("DELETE FROM atype_a WHERE activitiesID='" + activities_id + "'");
+                        Boolean check2 = db_select.delRecordBySql("DELETE FROM ACTIVITIES WHERE activitiesID='" + activities_id + "'");
+                        if (check1 == true && check2 == true) {
+                            request.setAttribute("status", "Delete Success");
+                            request.setAttribute("link", "activities.jsp");
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("status", "Delete Error");
+                            request.setAttribute("link", "activities.jsp");
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                            rd.forward(request, response);
+                        }
+                    } else {
+                        request.setAttribute("status", "Delete Error - Not Activities ID");
+                        request.setAttribute("link", "activities.jsp");
+                        RequestDispatcher rd
+                                = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                        rd.forward(request, response);
+                    }
+                    break;
+                }
+                case "activityBudget": {
+                    String activities_id = null;
+                    String item_id = null;
+                    item_id = request.getParameter("item_id");
+                    activities_id = request.getParameter("activities_id");
+                    if (activities_id != null && item_id != null) {
+                        Boolean check = db_select.delRecordBySql("DELETE FROM activitybudget WHERE itemID='" + item_id + "'");
+                        if (check) {
+                            request.setAttribute("status", "Delete Success");
+                            request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&activities_id=" + activities_id);
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
+                            rd.forward(request, response);
 
-                Boolean a = db_select.delRecordBySql("DELETE FROM atype_a WHERE activitiesID='" + activities_id + "'");
-                Boolean b = db_select.delRecordBySql("DELETE FROM ACTIVITIES WHERE activitiesID='" + activities_id + "'");
+                        } else {
+                            request.setAttribute("status", "Delete Error");
+                            request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&activities_id=" + activities_id);
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                            rd.forward(request, response);
+                        }
+                    } else {
+                        request.setAttribute("status", "Delete Error - No Activities ID or Item ID");
+                        request.setAttribute("link", "activities.jsp");
+                        RequestDispatcher rd
+                                = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                        rd.forward(request, response);
+                    }
 
-                request.setAttribute("status", "Delete Success");
-                request.setAttribute("link", "activities.jsp");
+                    break;
+                }
+                case "activityTimetable": {
+                    String activities_id = null;
+                    String timetable_id = null;
 
-                RequestDispatcher rd
-                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-                rd.forward(request, response);
-            }
+                    timetable_id = request.getParameter("timetable_id");
+                    activities_id = request.getParameter("activities_id");
+                    if (activities_id != null && timetable_id != null) {
+                        Boolean check = db_select.delRecordBySql("DELETE FROM activityTimetable WHERE activityTimeTableID='" + timetable_id + "'");
+                        if (check) {
+                            request.setAttribute("status", "Delete Success");
+                            request.setAttribute("link", "activitiyTimetable.jsp?activities_id=" + activities_id);
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("status", "Delete Error");
+                            request.setAttribute("link", "activitiyTimetable.jsp?activities_id=" + activities_id);
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                            rd.forward(request, response);
+                        }
+                    } else {
+                        request.setAttribute("status", "Delete Error - No Activities ID or Timetable ID");
+                        request.setAttribute("link", "activities.jsp");
+                        RequestDispatcher rd
+                                = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                        rd.forward(request, response);
+                    }
+                    break;
+                }
+                case "survey": {
+                    String sqID = null;
+                    sqID = request.getParameter("sqID");
+                    if (sqID != null) {
+                        Boolean check = db_select.delRecordBySql("DELETE FROM surveyquestion WHERE sqID='" + sqID + "'");
+                        if (check) {
+                            request.setAttribute("status", "Delete Success");
+                            request.setAttribute("link", "surveyDetail.jsp");
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("status", "Delete Error");
+                            request.setAttribute("link", "surveyDetail.jsp");
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                            rd.forward(request, response);
+                        }
+                    } else {
+                        request.setAttribute("status", "Delete Error - No SQ ID");
+                        request.setAttribute("link", "surveyDetail.jsp");
+                        RequestDispatcher rd
+                                = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                        rd.forward(request, response);
+                    }
 
-            if (table_type.equals("activityBudget")) {
-                item_id = request.getParameter("item_id");
-                activities_id = request.getParameter("activities_id");
-
-                Boolean a = db_select.delRecordBySql("DELETE FROM activitybudget WHERE itemID='" + item_id + "'");
-                request.setAttribute("status", "Delete Success");
-                request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&activities_id=" + activities_id);
-                RequestDispatcher rd
-                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-                rd.forward(request, response);
-            }
-
-            if (table_type.equals("activityTimetable")) {
-                timetable_id = request.getParameter("timetable_id");
-                activities_id = request.getParameter("activities_id");
-
-                Boolean a = db_select.delRecordBySql("DELETE FROM activityTimetable WHERE activityTimeTableID='" + timetable_id + "'");
-                request.setAttribute("status", "Delete Success");
-                request.setAttribute("link", "activitiyTimetable.jsp?activities_id=" + activities_id);
-                RequestDispatcher rd
-                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-                rd.forward(request, response);
-            }
-            if (table_type.equals("survey")) {
-                String sqID = null;
-                sqID = request.getParameter("sqID");
-                Boolean a = db_select.delRecordBySql("DELETE FROM surveyquestion WHERE sqID='" + sqID + "'");
-                request.setAttribute("status", "\"DELETE FROM surveyquestion WHERE sqID='" + sqID + "'");
-                request.setAttribute("link", "surveyDetail.jsp");
-                RequestDispatcher rd
-                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-                rd.forward(request, response);
-
+                    break;
+                }
+                default:
+                    break;
             }
         } catch (Exception ex) {
-            out.println(ex.getStackTrace());
-            out.println(ex.getMessage());
+
+            request.setAttribute("status", ex.getMessage());
+            request.setAttribute("link", "activities.jsp");
+            RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+            rd.forward(request, response);
+
         }
     }
 

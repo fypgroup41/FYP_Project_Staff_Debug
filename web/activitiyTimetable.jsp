@@ -52,7 +52,7 @@
 
         %>
 
-        <table border="1">
+        <table border="1" class="table">
             <tr><th>TimeTable ID</th><th>Description</th><th>Start Time</th><th>End Time </th><th></th></tr>
                     <%                        double budget = 0;
                         ArrayList activityTimetable = db_select.queryListAll("activityTimetable", " where activitiesID='" + request.getParameter("activities_id") + "' order by startTime");

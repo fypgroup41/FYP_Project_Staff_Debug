@@ -44,7 +44,9 @@
 
             %>
             <tr>
-                <td><%= activities_val.getName()%></td><td><a href="surveyDetail.jsp?activities_id=<%=survey_val.getActivitiesID()%>">For More Detail</a></td></tr>
+                <td><%= activities_val.getName()%></td><td>
+                    
+                    <a href="surveyDetail.jsp?activities_id=<%=survey_val.getActivitiesID()%>"><i class="fa fa-pencil-square-o fa-2x"></i></a></td></tr>
                 <%
                     }
 

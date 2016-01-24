@@ -57,7 +57,7 @@
                 <input type="hidden" name="table_type" value="activityTimetable" >                          
                 <tr><td>detail</td><td><input type="text" name="detail" value=""></td></tr>
                 <tr><td>startTime</td><td><input type="text" name="startTime" value=""></td></tr>
-                <tr><td>finish</td><td><input type="text" name="finish" value=""></td></tr>
+                <tr><td>finish</td><td><input type="text" name="finishTime" value=""></td></tr>
                 </td>
                 </tr>
             </table>

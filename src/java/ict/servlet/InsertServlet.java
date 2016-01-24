@@ -25,110 +25,183 @@ public class InsertServlet extends HttpServlet {
 
             String table_type = null;
             table_type = request.getParameter("table_type");
-            if (table_type.equals("activities")) {
-                String activities_id = null;
-                String name = null;
-                String districtNo = null;
-                String quota = null;
-                String targetAgeMax = null;
-                String targetAgeMin = null;
-                String deadline = null;
-                String venue = null;
-                String date = null;
-                String tag = null;
-                String activityType = null;
-                String description = null;
-                activityType = request.getParameter("activityType");
-                activities_id = request.getParameter("activities_id");
-                name = request.getParameter("name");
-                districtNo = request.getParameter("districtNo");
-                quota = request.getParameter("quota");
-                targetAgeMax = request.getParameter("targetAgeMax");
-                targetAgeMin = request.getParameter("targetAgeMin");
-                deadline = request.getParameter("deadline");
-                venue = request.getParameter("venue");
-                date = request.getParameter("date");
-                tag = request.getParameter("tag");
-                description = request.getParameter("description");
-                String validID = db_select.getAvailActivitiesID();
-                String sql = " INSERT INTO `activities` (`activitiesID`, `name`, `districtNo`, `quota`, `remain`, `targetAgeMax`, `targetAgeMin`, `deadline`, `venue`, `date`, `tag`, `staffID`, `description`) VALUES ('" + validID + "', '" + name + "', '" + districtNo + "', '" + quota + "', '" + quota + "', '" + targetAgeMax + "', '" + targetAgeMin + "', '" + deadline + "', '" + venue + "', '" + date + "', '" + tag + "', '" + "10"
-                        + "', '" + description + "')";
-                boolean isSuccess = db_select.editRecordBySql(sql);
-                sql = "INSERT INTO `atype_a` (`activityTypeID`, `activitiesID`) VALUES ('" + activityType + "', '" + validID + "')";
-                isSuccess = db_select.editRecordBySql(sql);
-                request.setAttribute("status", "Insert Success");
-                request.setAttribute("link", "activities.jsp");
-                RequestDispatcher rd
-                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-                rd.forward(request, response);
+
+            switch (table_type) {
+                case "activities": {
+                    String name = null;
+                    String districtNo = null;
+                    String quota = null;
+                    String targetAgeMax = null;
+                    String targetAgeMin = null;
+                    String deadline = null;
+                    String venue = null;
+                    String date = null;
+                    String tag = null;
+                    String activityType = null;
+                    String description = null;
+                    activityType = request.getParameter("activityType");
+                    name = request.getParameter("name");
+                    districtNo = request.getParameter("districtNo");
+                    quota = request.getParameter("quota");
+                    targetAgeMax = request.getParameter("targetAgeMax");
+                    targetAgeMin = request.getParameter("targetAgeMin");
+                    deadline = request.getParameter("deadline");
+                    venue = request.getParameter("venue");
+                    date = request.getParameter("date");
+                    tag = request.getParameter("tag");
+                    description = request.getParameter("description");
+
+                    if (name != null && districtNo != null && quota != null && targetAgeMax != null && targetAgeMin != null && deadline != null && venue != null && date != null && tag != null && activityType != null) {
+
+                        String validID = db_select.getAvailActivitiesID();
+                        String sql = " INSERT INTO `activities` (`activitiesID`, `name`, `districtNo`, `quota`, `remain`, `targetAgeMax`, `targetAgeMin`, `deadline`, `venue`, `date`, `tag`, `staffID`, `description`) VALUES ('" + validID + "', '" + name + "', '" + districtNo + "', '" + quota + "', '" + quota + "', '" + targetAgeMax + "', '" + targetAgeMin + "', '" + deadline + "', '" + venue + "', '" + date + "', '" + tag + "', '" + "10"
+                                + "', '" + description + "')";
+                        boolean check1 = db_select.editRecordBySql(sql);
+                        sql = "INSERT INTO `atype_a` (`activityTypeID`, `activitiesID`) VALUES ('" + activityType + "', '" + validID + "')";
+                        boolean check2 = db_select.editRecordBySql(sql);
+
+                        if (check1 == true && check2 == true) {
+                            request.setAttribute("status", "Insert Success");
+                            request.setAttribute("link", "activities.jsp");
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("status", "Insert Error");
+                            request.setAttribute("link", "activities.jsp");
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                            rd.forward(request, response);
+                        }
+                    } else {
+                        request.setAttribute("status", "Insert Error - Please Check Again");
+                        request.setAttribute("link", "activities.jsp");
+                        RequestDispatcher rd
+                                = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                        rd.forward(request, response);
+                    }
+                    break;
+                }
+                case "activityBudget": {
+                    String itemName = null;
+                    String itemType = null;
+                    String cost = null;
+                    String number = null;
+                    String remark = null;
+                    String activities_id = null;
+                    activities_id = request.getParameter("activities_id");
+                    itemName = request.getParameter("itemName");
+                    itemType = request.getParameter("itemType");
+                    cost = request.getParameter("cost");
+                    number = request.getParameter("number");
+                    remark = request.getParameter("remark");
+
+                    if (itemName != null && itemType != null && cost != null && number != null && remark != null && activities_id != null) {
+                        String validID = db_select.getAvailBudgetItemID();
+                        String sql = "INSERT INTO `activitybudget` (`itemID`, `activitiesID`, `itemName`, `itemType`, `cost`, `number`, `remark`) VALUES('" + validID + "', '" + activities_id + "', '" + itemName + "', '" + itemType + "', '" + cost + "', '" + number + "', '" + remark + "')";
+                        boolean check = db_select.editRecordBySql(sql);
+                        if (check) {
+                            request.setAttribute("status", "Insert Success");
+                            request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&activities_id=" + activities_id);
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("status", "Insert Error");
+                            request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&activities_id=" + activities_id);
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                            rd.forward(request, response);
+                        }
+                    } else {
+                        request.setAttribute("status", "Insert Error - Please Check Again");
+                        request.setAttribute("link", "activities,jsp");
+                        RequestDispatcher rd
+                                = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                        rd.forward(request, response);
+                    }
+
+                    break;
+                }
+
+                case "activityTimetable": {
+                    String detail = null;
+                    String startTime = null;
+                    String finishTime = null;
+                    String activities_id = null;
+                    detail = request.getParameter("detail");
+                    startTime = request.getParameter("startTime");
+                    finishTime = request.getParameter("finishTime");
+                    activities_id = request.getParameter("activities_id");
+
+                    if (detail != null && startTime != null && finishTime != null && activities_id != null) {
+
+                        String validID = db_select.getAvailTimeTableID();
+                        String sql = "INSERT INTO `activitytimetable` (`activityTimeTableID`, `activitiesID`, `detail`, `startTime`, `finishTime`) VALUES ('" + validID + "', '" + activities_id + "', '" + detail + "', '" + startTime + "', '" + finishTime + "');";
+                        boolean check = db_select.editRecordBySql(sql);
+                        if (check) {
+                            request.setAttribute("status", "Insert Success");
+                            request.setAttribute("link", "activitiyTimetable.jsp?activities_id=" + activities_id);
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("status", "Insert Error");
+                            request.setAttribute("link", "activitiyTimetable.jsp?activities_id=" + activities_id);
+                            RequestDispatcher rd
+                                    = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                            rd.forward(request, response);
+                        }
+                    } else {
+                        request.setAttribute("status", "Insert Error - Please Check Again");
+                        request.setAttribute("link", "activities.jsp");
+                        RequestDispatcher rd
+                                = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                        rd.forward(request, response);
+                    }
+                    break;
+                }
+                case "survey": {
+                    String survey_id = null;
+                    String qTypeID = null;
+                    String question = null;
+
+                    survey_id = request.getParameter("survey_id");
+                    qTypeID = request.getParameter("qTypeID");
+                    question = request.getParameter("question");
+                    if (survey_id != null && qTypeID != null && question != null) {
+                        String validID = db_select.getAvailSurveyQuestionID();
+                        String sql = "INSERT INTO `surveyquestion` (`sqID`, `question`, `qTypeID`, `maxMark`, `minMark`,`surveyID`) VALUES ('" + validID + "', '" + question + "', '" + qTypeID + "', " + "10" + ", " + "1" + ",'" + survey_id + "');";
+                        boolean check = db_select.editRecordBySql(sql);
+                        if (check) {
+                            request.setAttribute("status", "Insert Success");
+                            request.setAttribute("link", "survey.jsp");
+                            RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/requestSuccess.jsp");
+                            rd.forward(request, response);
+                        } else {
+                            request.setAttribute("status", "Insert Error");
+                            request.setAttribute("link", "survey.jsp");
+                            RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                            rd.forward(request, response);
+                        }
+                    } else {
+                        request.setAttribute("status", "Insert Error - Please Check Again");
+                        request.setAttribute("link", "survey.jsp");
+                        RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+                        rd.forward(request, response);
+                    }
+                    break;
+                }
+                default:
+                    break;
             }
-            if (table_type.equals("activityBudget")) {
-
-                String itemName = null;
-                String itemType = null;
-                String cost = null;
-                String number = null;
-                String remark = null;
-                String activities_id = null;
-                activities_id = request.getParameter("activities_id");
-                itemName = request.getParameter("itemName");
-                itemType = request.getParameter("itemType");
-                cost = request.getParameter("cost");
-                number = request.getParameter("number");
-                remark = request.getParameter("remark");
-                String validID = db_select.getAvailBudgetItemID();
-                String sql = "INSERT INTO `activitybudget` (`itemID`, `activitiesID`, `itemName`, `itemType`, `cost`, `number`, `remark`) VALUES('" + validID + "', '" + activities_id + "', '" + itemName + "', '" + itemType + "', '" + cost + "', '" + number + "', '" + remark + "')";
-                boolean isSuccess = db_select.editRecordBySql(sql);
-                request.setAttribute("status", "Insert Success");
-                request.setAttribute("link", "activitiesBudget.jsp?table_type=activities&activities_id=" + activities_id);
-                RequestDispatcher rd
-                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-                rd.forward(request, response);
-            }
-            if (table_type.equals("activityTimetable")) {
-                String detail = null;
-                String startTime = null;
-                String finish = null;
-                String activities_id = null;
-
-                detail = request.getParameter("detail");
-                startTime = request.getParameter("startTime");
-                finish = request.getParameter("finish");
-                activities_id = request.getParameter("activities_id");
-
-                String validID = db_select.getAvailTimeTableID();
-                String sql = "INSERT INTO `activitytimetable` (`activityTimeTableID`, `activitiesID`, `detail`, `startTime`, `finish`) VALUES ('" + validID + "', '" + activities_id + "', '" + detail + "', '" + startTime + "', '" + finish + "');";
-                boolean isSuccess = db_select.editRecordBySql(sql);
-                request.setAttribute("status", "Insert Success");
-                request.setAttribute("link", "activitiyTimetable.jsp?activities_id=" + activities_id);
-                RequestDispatcher rd
-                        = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-                rd.forward(request, response);
-            }
-            if (table_type.equals("survey")) {
-                String survey_id = null;
-                String qTypeID = null;
-                String question = null;
-
-                survey_id = request.getParameter("survey_id");
-                qTypeID = request.getParameter("qTypeID");
-                question = request.getParameter("question");
-
-                String validID = db_select.getAvailSurveyQuestionID();
-                String sql = "INSERT INTO `surveyquestion` (`sqID`, `question`, `qTypeID`, `maxMark`, `minMark`,`surveyID`) VALUES ('" + validID + "', '" + question + "', '" + qTypeID + "', " + "10" + ", " + "1" + ",'" + survey_id + "');";
-
-                boolean isSuccess = db_select.editRecordBySql(sql);
-
-                request.setAttribute("status", "Insert Success");
-                request.setAttribute("link", "surveyDetail.jsp");
-                RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/updateSucess.jsp");
-                rd.forward(request, response);
-            }
-     
-//<a href="insertServlet?table_type=survey_create&activities_id=<%=act.getActivitiesID()%>">TimeTable Link</a>
         } catch (Exception ex) {
 
-            out.println(ex.getMessage());
+            request.setAttribute("status", ex.getMessage());
+            request.setAttribute("link", "activities.jsp");
+            RequestDispatcher rd = request.getServletContext().getRequestDispatcher("/requestError.jsp");
+            rd.forward(request, response);
+
         }
     }
 

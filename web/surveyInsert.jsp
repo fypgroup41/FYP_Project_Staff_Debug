@@ -57,7 +57,7 @@
 
             <input type="hidden" name="table_type" value="survey">
             <input type="hidden" name="survey_id" value="<%=request.getParameter("survey_id")%>">
-            <table>
+            <table class="table">
                 <tr><td>Question</td><td>            <input type="text"name="question"></td></tr>
                 <tr><td>Question Type</td><td>
                         <select name="qTypeID" >
@@ -70,7 +70,7 @@
             </table>
 
 
-            <br><br><br>
+            <br>
             <input type="submit" value="Update">
         </form>
 

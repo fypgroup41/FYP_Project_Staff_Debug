@@ -31,7 +31,7 @@
 
 
 
-            <table>
+            <table class="table">
 
 
                 <tr><td>ActivitiesID</td><td><%=request.getParameter("activities_id")%></td></tr>

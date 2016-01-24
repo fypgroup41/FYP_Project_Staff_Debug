@@ -41,7 +41,7 @@
 
 
 #loginForm>h1{
-    background:#3399cc;
+    background: 	#CD853F;
     padding:20px 0;
     font-size:large;
     font-weight:300;
@@ -51,7 +51,7 @@
 
 #loginForm>form{
 
-    padding:6% 4%;
+    padding:10% 10%;
 }
 
 #loginForm>input[type="text"]+input[type="password"]{

@@ -62,8 +62,8 @@
         <%                    String dateInString = act.getDate();
             Date date = sdf.parse(dateInString);
         %>
-        <br>
-        <span style="text-align:center"><h1><%= act.getName()%></h1></span>
+        
+        <span style="text-align:center"><h1><%= act.getName()+"   "%><a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>"><i class="fa fa-trash"></i></a></h1></span>
         <br>
         <br>
 
@@ -132,7 +132,7 @@
                         </select></td></tr>                
 
 
-                <tr><td>       <br><br>    <input type="submit" value="Update"></td><td></td></tr>
+                <tr><td>       <br><br>    <input type="submit" value="Update"></td><td> </td></tr>
 
 
 
@@ -143,7 +143,7 @@
 
 
 
-            <a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>">Delete Link</a>
+
 
 
 

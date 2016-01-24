@@ -37,7 +37,7 @@
             }
         %>
 
-        <%
+        <%   String activities_id_temp = null;
             DateCalculate dc = new DateCalculate();
             SimpleDateFormat sdfbd = new SimpleDateFormat("yyyy-MM-dd");
             String dbUser = this.getServletContext().getInitParameter("dbUsername");
@@ -59,116 +59,137 @@
 
 
 
-        <%                    String dateInString = act.getDate();
+        <%            String dateInString = act.getDate();
             Date date = sdf.parse(dateInString);
         %>
+        <%   activities_id_temp = act.getActivitiesID();%>
         <br>
         <span style="text-align:center"><h1><%= act.getName()%></h1></span>
-        <br>
-        <br>
-
-        <form method="post" action="updateServlet">
-            <input type="hidden" name="table_type" value="activities" >
-
-            <input type="hidden" name="activities_id" value="<%=act.getActivitiesID()%>">
-            <table  align="center" >
-
-                <tr><td>ActivitiesID</td><td><%=act.getActivitiesID()%></td></tr>
-                <tr><td>Name</td><td><%=act.getName()%></td></tr>
-
-                <tr><td>districtNo</td><td>     
-                        <%          for (int j = 0; j < district_data.size(); j++) {
-                                DistrictBean district = (DistrictBean) district_data.get(j);
-                        %>
-                        <% if (act.getDistrictNo().toString().equals(district.getDistrictID().toString())) {%>
-                        <%=district.getName()%>
-                        <% } else {%>
-
-                        <%   }
-                            }
-
-                        %>
-                    </td></tr>
-                <tr><td>quota</td><td><%=act.getQuota()%></td></tr>
-
-                <tr><td>targetAgeMax</td><td>
-                        <%=act.getTargetAgeMax()%>
-                    </td></tr>
-                <tr><td>targetAgeMin</td><td><%=act.getTargetAgeMin()%>
-                    </td></tr>
-                <tr><td>deadline</td><td><%=act.getDeadline()%></td></tr>
-                <tr><td>venue</td><td><%=act.getVenue()%></td></tr>
-                <tr><td>date</td><td><%=act.getDate()%></td></tr>
-                <tr><td>tag</td><td><%=act.getTag()%></td></tr>
-                <tr><td>description</td><td><%=act.getDescription()%></td></tr>
-                <tr><td>districtNo</td><td>   
-                        <%
-                            Atype_ABean activityTypeActivities_val = (Atype_ABean) activityTypeActivities.get(0);
-                            for (int j = 0; j < activityType.size(); j++) {
-                                ActivityTypeBean activityType_val = (ActivityTypeBean) activityType.get(j);
-                        %>
-                        <% if (!activityType_val.getActivityTypeID().toString().equals(activityTypeActivities_val.getActivityTypeID().toString())) {%>
-                        <% } else {%>
-                        <%=activityType_val.getTypeName()%>
-                        <%   }
-                            }
-
-                        %>
-                    </td></tr>                
+    <center>    <a href="activitiesEdit.jsp?activities_id=<%=activities_id_temp%>">    <i class="fa fa-pencil-square-o fa-2x"></i></a>
+        <a href="deleteServlet?table_type=activities&activities_id=<%=activities_id_temp%>"<i class="fa fa-trash fa-2x"></i>
+        </a>
+        <a href="activitiesBudget.jsp?activities_id=<%=activities_id_temp%>"<i class="fa fa-usd fa-2x"></i>
+        </a>
+        <a href="activitiyTimetable.jsp?activities_id=<%=activities_id_temp%>"><i class="fa fa-calendar fa-2x"></i>
+        </a>
+        <a href="surveyCreate.jsp?table_type=survey_create&activities_id=<%=activities_id_temp%>"><i class="fa fa-list-alt fa-2x"></i>
+        </a></center>
+    <br>
+    <br>
 
 
 
 
+    <table  align="center"class="table" >
+
+        <tr><td>ActivitiesID</td><td><%=act.getActivitiesID()%></td></tr>
+        <tr><td>Name</td><td><%=act.getName()%></td></tr>
+
+        <tr><td>districtNo</td><td>     
+                <%          for (int j = 0; j < district_data.size(); j++) {
+                        DistrictBean district = (DistrictBean) district_data.get(j);
+                %>
+                <% if (act.getDistrictNo().toString().equals(district.getDistrictID().toString())) {%>
+                <%=district.getName()%>
+                <%   activities_id_temp = act.getActivitiesID();%>
+
+                <% } else {%>
+
+                <%   }
+                    }
+
+                %>
+            </td></tr>
+        <tr><td>quota</td><td><%=act.getQuota()%></td></tr>
+
+        <tr><td>targetAgeMax</td><td>
+                <%=act.getTargetAgeMax()%>
+            </td></tr>
+        <tr><td>targetAgeMin</td><td><%=act.getTargetAgeMin()%>
+            </td></tr>
+        <tr><td>deadline</td><td><%=act.getDeadline()%></td></tr>
+        <tr><td>venue</td><td><%=act.getVenue()%></td></tr>
+        <tr><td>date</td><td><%=act.getDate()%></td></tr>
+        <tr><td>tag</td><td><%=act.getTag()%></td></tr>
+        <tr><td>description</td><td><%=act.getDescription()%></td></tr>
+        <tr><td>districtNo</td><td>   
 
 
-            </table>
+                <%
+                    Atype_ABean activityTypeActivities_val = (Atype_ABean) activityTypeActivities.get(0);
+                    for (int j = 0; j < activityType.size(); j++) {
+                        ActivityTypeBean activityType_val = (ActivityTypeBean) activityType.get(j);
+                %>
+                <% if (!activityType_val.getActivityTypeID().toString().equals(activityTypeActivities_val.getActivityTypeID().toString())) {%>
+                <% } else {%>
+
+                <%=activityType_val.getTypeName()%>
+                <%   }
+                    }
+
+                %>
+            </td></tr>                
 
 
-            <br>
 
 
 
-            <a href="activitiesEdit.jsp?activities_id=<%=act.getActivitiesID()%>">Update Link</a>
-            <a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>">Delete Link</a>
-            <a href="activitiesBudget.jsp?activities_id=<%=act.getActivitiesID()%>">Budget Link</a>
-            <a href="activitiyTimetable.jsp?activities_id=<%=act.getActivitiesID()%>">TimeTable Link</a>
-            <a href="surveyCreate.jsp?table_type=survey_create&activities_id=<%=act.getActivitiesID()%>">TimeTable Link</a>
+
+    </table>
+
+
+    <br>
 
 
 
-            <%   }
-
-            %>
 
 
-        </form>
-        <h3>Activities Member Record</h3>
-        <table border="1">
-            <tr><th>Member ID</th><th>District ID</th><th>Age</th><th>Nick Name</th><th>Status</th></tr>
-                    <%                ArrayList activitiesRecord = db_select.queryListAll("ActivitiesRecord", " where activitiesID=\"" + request.getParameter("actID") + "\"");
-                        for (int j = 0; j < activitiesRecord.size(); j++) {
-                            ActivitiesRecordBean activitiesRecord_val = (ActivitiesRecordBean) activitiesRecord.get(j);
-                            ArrayList member_aryData = db_select.queryListAll("member", " where memberID='" + activitiesRecord_val.getMemberID() + "'");
-                            MemberBean member_val2 = (MemberBean) member_aryData.get(0);
-                    %>
 
 
-            <tr><td><%= activitiesRecord_val.getMemberID()%></td><td><%=member_val2.getDistrictID()%></td><td>
-                    <%
-                        String bate = member_val2.getBirthday();
-                        Date bd = sdfbd.parse(bate);
-                        out.print(dc.calculateAge(bd));
-                    %>
-                </td><td><%=member_val2.getNickName()%></td><td><%= activitiesRecord_val.getState()%></td></tr>
+    <%   }
 
-            <%
+    %>
 
-                }
-            %>
+    <h3 align="center">Activities Member Record</h3>
+    <%                ArrayList activitiesRecord = db_select.queryListAll("ActivitiesRecord", " where activitiesID=\"" + request.getParameter("actID") + "\"");
+        if (activitiesRecord.size() != 0) {%>
+
+    <table  align="center" border="1">
+        <tr><th>Member ID</th><th>District ID</th><th>Age</th><th>Nick Name</th><th>Status</th></tr>
+
+        <%   for (int j = 0; j < activitiesRecord.size(); j++) {
+                ActivitiesRecordBean activitiesRecord_val = (ActivitiesRecordBean) activitiesRecord.get(j);
+                ArrayList member_aryData = db_select.queryListAll("member", " where memberID='" + activitiesRecord_val.getMemberID() + "'");
+                MemberBean member_val2 = (MemberBean) member_aryData.get(0);
+        %>
 
 
-        </table>
+        <tr><td><%= activitiesRecord_val.getMemberID()%></td><td><%=member_val2.getDistrictID()%></td><td>
+                <%
+                    String bate = member_val2.getBirthday();
+                    Date bd = sdfbd.parse(bate);
+                    out.print(dc.calculateAge(bd));
+                %>
+            </td><td><%=member_val2.getNickName()%></td><td><%= activitiesRecord_val.getState()%></td></tr>
+
+        <%
+
+            }
+        %>
 
 
-    </body>
-</html>
+    </table>
+
+
+
+    <%
+        } else {
+            out.print("<center><h3>No Record</h3></center>");
+        }
+    %>
+
+
+</body
+>
+</html
+>

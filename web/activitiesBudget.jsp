@@ -47,8 +47,10 @@
 
 
         %>
-        <a href="activitiesBudgetInsert.jsp?activities_id=<%=request.getParameter("activities_id")%>">Insert</a>
-        <table border="1">
+        <a href="activitiesBudgetInsert.jsp?activities_id=<%=request.getParameter("activities_id")%>"><i class="fa fa-plus fa-2x"></i>
+</a>
+        
+        <table border="1" class="table">
             <tr><th>Item ID</th><th>Item Name</th><th>Item Type</th><th>Cost </th><th>Qty</th><th>Remark</th></tr>
                     <%
                         double budget = 0;

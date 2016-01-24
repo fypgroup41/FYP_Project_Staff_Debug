@@ -38,12 +38,12 @@
         %>
         <form method="post" action="insertServlet">
 
-            <table  align="center" >
+            <table  align="center" class="table">
 
                 <input type="hidden" name="table_type" value="activities") >
                 <tr><td>Name</td><td><input type="text" name="name" value="" size="35"></td></tr>
 
-                <tr><td>districtNo</td><td>       <select name="districtNo">
+                <tr><td>District No</td><td>       <select name="districtNo">
                             <%          for (int j = 0; j < district_data.size(); j++) {
                                     DistrictBean district = (DistrictBean) district_data.get(j);
                             %>
@@ -51,9 +51,9 @@
                             <option value="<%=district.getDistrictID()%>"><%=district.getName()%></option>
                             <% }%>
                         </select></td></tr>
-                <tr><td>quota</td><td><input type="text" name="quota" value="" size="35" min="0"></td></tr>
+                <tr><td>Quota</td><td><input type="text" name="quota" value="" size="35" min="0"></td></tr>
 
-                <tr><td>targetAgeMax</td><td>
+                <tr><td>TargetAgeMax</td><td>
                         <input type="range" style="width:auto;display: initial;" name="targetAgeMax"  value=""  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show">50</span>
                         <script type="text/javascript">
                             function targetAgeMax_show(newValue)
@@ -62,7 +62,7 @@
                             }
                         </script>
                     </td></tr>
-                <tr><td>targetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="targetAgeMin" value="" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show">50</span>
+                <tr><td>TargetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="targetAgeMin" value="" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show">50</span>
                         <script type="text/javascript">
                             function targetAgeMin_show(newValue)
                             {
@@ -71,12 +71,12 @@
                         </script>
 
                     </td></tr>
-                <tr><td>deadline</td><td><input type="text" name="deadline" value="" size="35"></td></tr>
-                <tr><td>venue</td><td><input type="text" name="venue" value="" size="35"></td></tr>
-                <tr><td>date</td><td><input type="text" name="date" value="" size="35"></td></tr>
-                <tr><td>tag</td><td><input type="text" name="tag" value="" size="35"></td></tr>
-                <tr><td>description</td><td><textarea name="description" ></textarea></td></tr>
-                <tr><td>districtNo</td><td>       <select name="activityType">
+                <tr><td>Deadline</td><td><input type="text" name="deadline" value="" size="35"></td></tr>
+                <tr><td>Venue</td><td><input type="text" name="venue" value="" size="35"></td></tr>
+                <tr><td>Date</td><td><input type="text" name="date" value="" size="35"></td></tr>
+                <tr><td>Tag</td><td><input type="text" name="tag" value="" size="35"></td></tr>
+                <tr><td>Description</td><td><textarea name="description" ></textarea></td></tr>
+                <tr><td>Activity Type</td><td>       <select name="activityType">
                             <%
 
                                 for (int j = 0; j < activityType.size(); j++) {

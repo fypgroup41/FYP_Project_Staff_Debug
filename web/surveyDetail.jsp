@@ -86,7 +86,7 @@
                                 }%>
                         </select> 
                     </td><td>
-                        <a href="deleteServlet?table_type=survey&sqID=<%=surveyQuestion_val.getSqID()%>">Delete</a>
+                        <a href="deleteServlet?table_type=survey&sqID=<%=surveyQuestion_val.getSqID()%>"><i class="fa fa-trash fa-2x"></i></a>
                     </td></tr>
                 </td></tr>
                 <%}
@@ -96,7 +96,7 @@
 
 
     </form>
-    <a href="surveyInsert.jsp?survey_id=<%=survey_id%>">Insert</a>
+    <a href="surveyInsert.jsp?survey_id=<%=survey_id%>"><i class="fa fa-plus fa-2x"></i></a>
 
 </body>
 </html>
