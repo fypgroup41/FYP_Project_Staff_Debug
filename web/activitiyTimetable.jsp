@@ -63,7 +63,7 @@
                 <td><%=activityTimetable_val.getActivityTimeTableID()%></td>
                 <td><%=activityTimetable_val.getDetail()%></td>
                 <td><%=activityTimetable_val.getStartTime()%></td>
-                <td><%=activityTimetable_val.getFinish()%></td>
+                <td><%=activityTimetable_val.getFinishTime()%></td>
                 <td>
                     <a href="activitiyTimetableEdit.jsp?timetable_id=<%=activityTimetable_val.getActivityTimeTableID()%>">Edit</a>
                     <a href="deleteServlet?table_type=activityTimetable&activities_id=<%=request.getParameter("activities_id")%>&timetable_id=<%=activityTimetable_val.getActivityTimeTableID()%>">Delete</a>
