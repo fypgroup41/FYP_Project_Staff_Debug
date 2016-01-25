@@ -154,7 +154,7 @@
     <%                ArrayList activitiesRecord = db_select.queryListAll("ActivitiesRecord", " where activitiesID=\"" + request.getParameter("actID") + "\"");
         if (activitiesRecord.size() != 0) {%>
 
-    <table  align="center" border="1">
+    <table  align="center" border="1" class="table">
         <tr><th>Member ID</th><th>District ID</th><th>Age</th><th>Nick Name</th><th>Status</th></tr>
 
         <%   for (int j = 0; j < activitiesRecord.size(); j++) {
