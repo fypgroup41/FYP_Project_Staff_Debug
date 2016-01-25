@@ -46,12 +46,12 @@
             DB_Select db_select = new DB_Select(dbUrl, dbUser, dbPassword);
             ArrayList district_data = db_select.queryDistrict();
             ArrayList activityType = db_select.queryListAll("activityType", "");
-            ArrayList activityTypeActivities = db_select.queryListAll("atype_A", " where activitiesID='" + request.getParameter("actID") + "'");
+            ArrayList activityTypeActivities = db_select.queryListAll("atype_A", " where activitiesID='" + request.getParameter("activities_id") + "'");
         %>
 
         <%            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-            ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("actID") + "\"");
+            ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("activities_id") + "\"");
             for (int i = 0; i < aryData.size(); i++) {
                 ActivitiesBean act = (ActivitiesBean) aryData.get(i);
 
@@ -72,8 +72,18 @@
         </a>
         <a href="activitiyTimetable.jsp?activities_id=<%=activities_id_temp%>"><i class="fa fa-calendar fa-2x"></i>
         </a>
+        <%
+            ArrayList survey = db_select.queryListAll("survey", " where activitiesID='" + activities_id_temp + "'");
+            if (survey.size() == 0) {
+        %>
         <a href="surveyCreate.jsp?table_type=survey_create&activities_id=<%=activities_id_temp%>"><i class="fa fa-list-alt fa-2x"></i>
-        </a></center>
+        </a>
+        <%}
+        %>
+
+
+
+    </center>
     <br>
     <br>
 
@@ -151,7 +161,7 @@
     %>
 
     <h3 align="center">Activities Member Record</h3>
-    <%                ArrayList activitiesRecord = db_select.queryListAll("ActivitiesRecord", " where activitiesID=\"" + request.getParameter("actID") + "\"");
+    <%                ArrayList activitiesRecord = db_select.queryListAll("ActivitiesRecord", " where activitiesID=\"" + request.getParameter("activities_id") + "\"");
         if (activitiesRecord.size() != 0) {%>
 
     <table  align="center" border="1" class="table">
@@ -179,7 +189,7 @@
 
 
     </table>
-
+        <a href="excel_attandance_list.jsp?activities_id=<%=request.getParameter("activities_id")%>" >Export Excel Document</a>
 
 
     <%

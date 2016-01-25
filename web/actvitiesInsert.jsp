@@ -54,16 +54,8 @@
                         </select></td></tr>
                 <tr><td>Quota</td><td><input type="text" name="quota" value="" size="35" min="0"></td></tr>
 
-                <tr><td>TargetAgeMax</td><td>
-                        <input type="range" style="width:auto;display: initial;" name="targetAgeMax"  value=""  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show">50</span>
-                        <script type="text/javascript">
-                            function targetAgeMax_show(newValue)
-                            {
-                                document.getElementById("targetAgeMax_show").innerHTML = newValue;
-                            }
-                        </script>
-                    </td></tr>
-                <tr><td>TargetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="targetAgeMin" value="" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show">50</span>
+
+                <tr><td>TargetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="targetAgeMin" value="0" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show">0</span>
                         <script type="text/javascript">
                             function targetAgeMin_show(newValue)
                             {
@@ -71,6 +63,15 @@
                             }
                         </script>
 
+                    </td></tr>
+                <tr><td>TargetAgeMax</td><td>
+                        <input type="range" style="width:auto;display: initial;" name="targetAgeMax"  value="0"  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show">0</span>
+                        <script type="text/javascript">
+                            function targetAgeMax_show(newValue)
+                            {
+                                document.getElementById("targetAgeMax_show").innerHTML = newValue;
+                            }
+                        </script>
                     </td></tr>
                 <tr><td>Deadline</td><td><input type="text" name="deadline" value="" size="35" placeholder="YYYY-MM-DD HH:mm:ss"></td></tr>
                 <tr><td>Venue</td><td><input type="text" name="venue" value="" size="35" ></td></tr>

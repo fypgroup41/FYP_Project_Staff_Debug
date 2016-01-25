@@ -35,6 +35,8 @@
         %>
         <span><a href="surveyDemo.jsp">Survey Demo</a></span>
         <table border="1">
+            
+            <tr><th>Activities Name</th><th>Link</th></tr>
 
             <%                        ArrayList survey = db_select.queryListAll("survey", "");
                 for (int j = 0; j < survey.size(); j++) {

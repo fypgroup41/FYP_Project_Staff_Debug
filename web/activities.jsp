@@ -68,7 +68,7 @@
                         $('#example tbody').on('click', 'tr', function () {
                             var rowData = table.row(this).data();
                             //alert(rowData[0]);
-                            $(location).attr('href', '<%=getServletContext().getContextPath() + "/"%>activitiesDetail.jsp?actID=' + rowData[0]);
+                            $(location).attr('href', '<%=getServletContext().getContextPath() + "/"%>activitiesDetail.jsp?activities_id=' + rowData[0]);
                             // ... do something with `rowData`
                         });
                     },

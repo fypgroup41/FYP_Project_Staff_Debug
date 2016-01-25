@@ -63,7 +63,7 @@
             Date date = sdf.parse(dateInString);
         %>
         <h4> Update Activity - Activity ID :  <%=act.getActivitiesID()%> </h4>
-        <span style="text-align:center"><h1><%= act.getName()+"   "%><a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>"><i class="fa fa-trash"></i></a></h1></span>
+        <span style="text-align:center"><h1><%= act.getName() + "   "%><a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>"><i class="fa fa-trash"></i></a></h1></span>
         <br>
         <br>
 
@@ -91,16 +91,6 @@
                             %>
                         </select></td></tr>
                 <tr><td>quota</td><td><input type="text" name="quota" value="<%=act.getQuota()%>" size="35" min="0"></td></tr>
-
-                <tr><td>targetAgeMax</td><td>
-                        <input type="range" style="width:auto;display: initial;" name="targetAgeMax"  value="<%=act.getTargetAgeMax()%>"  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show"><%=act.getTargetAgeMax()%></span>
-                        <script type="text/javascript">
-                            function targetAgeMax_show(newValue)
-                            {
-                                document.getElementById("targetAgeMax_show").innerHTML = newValue;
-                            }
-                        </script>
-                    </td></tr>
                 <tr><td>targetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="targetAgeMin" value="<%=act.getTargetAgeMin()%>" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show"><%=act.getTargetAgeMin()%></span>
                         <script type="text/javascript">
                             function targetAgeMin_show(newValue)
@@ -110,6 +100,16 @@
                         </script>
 
                     </td></tr>
+                <tr><td>targetAgeMax</td><td>
+                        <input type="range" style="width:auto;display: initial;" name="targetAgeMax"  value="<%=act.getTargetAgeMax()%>"  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show"><%=act.getTargetAgeMax()%></span>
+                        <script type="text/javascript">
+                            function targetAgeMax_show(newValue)
+                            {
+                                document.getElementById("targetAgeMax_show").innerHTML = newValue;
+                            }
+                        </script>
+                    </td></tr>
+
                 <tr><td>deadline</td><td><input type="text" name="deadline" value="<%=act.getDeadline()%>" size="35"></td></tr>
                 <tr><td>venue</td><td><input type="text" name="venue" value="<%=act.getVenue()%>" size="35"></td></tr>
                 <tr><td>date</td><td><input type="text" name="date" value="<%=act.getDate()%>" size="35"></td></tr>
