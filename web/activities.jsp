@@ -89,7 +89,7 @@
         <title>JSP Page</title>
     <body>
         <jsp:include page="/header.jsp"/>
-                <a href="actvitiesInsert.jsp"><i class="fa fa-plus fa-2x"></i></a><table id="example" class="display" width="100%"></table>
+                <a href="actvitiesInsert.jsp"><i class="fa fa-plus fa-2x"></i></a><table id="example" class="display" width="100%" style="cursor: pointer"></table>
 
     </body>
 </html>
