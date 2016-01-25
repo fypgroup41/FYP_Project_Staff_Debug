@@ -47,22 +47,13 @@
             ArrayList district_data = db_select.queryDistrict();
             ArrayList activityType = db_select.queryListAll("activityType", "");
             ArrayList activityTypeActivities = db_select.queryListAll("atype_A", " where activitiesID='" + request.getParameter("activities_id") + "'");
-        %>
-
-        <%            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             ArrayList aryData = db_select.queryListAll("activities", " where activitiesID=\"" + request.getParameter("activities_id") + "\"");
             for (int i = 0; i < aryData.size(); i++) {
                 ActivitiesBean act = (ActivitiesBean) aryData.get(i);
-
-        %>
-
-
-
-        <%            String dateInString = act.getDate();
-            Date date = sdf.parse(dateInString);
-        %>
-        <%   activities_id_temp = act.getActivitiesID();%>
+                String dateInString = act.getDate();
+                Date date = sdf.parse(dateInString);
+                activities_id_temp = act.getActivitiesID();%>
         <br>
         <span style="text-align:center"><h1><%= act.getName()%></h1></span>
     <center>    <a href="activitiesEdit.jsp?activities_id=<%=activities_id_temp%>">    <i class="fa fa-pencil-square-o fa-2x"></i></a>
@@ -80,18 +71,10 @@
         </a>
         <%}
         %>
-
-
-
     </center>
     <br>
     <br>
-
-
-
-
     <table  align="center"class="table" >
-
         <tr><td>ActivitiesID</td><td><%=act.getActivitiesID()%></td></tr>
         <tr><td>Name</td><td><%=act.getName()%></td></tr>
 
@@ -189,7 +172,7 @@
 
 
     </table>
-        <a href="excel_attandance_list.jsp?activities_id=<%=request.getParameter("activities_id")%>" >Export Excel Document</a>
+    <a href="excel_attandance_list.jsp?activities_id=<%=request.getParameter("activities_id")%>" >Export CSV Document</a>
 
 
     <%
