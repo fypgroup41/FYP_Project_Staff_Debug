@@ -34,7 +34,7 @@
             DB_Select db_select = new DB_Select(dbUrl, dbUser, dbPassword);
 
             ArrayList surveyAnswer = db_select.queryListAll("surveyAnswer", "");
-            ArrayList surveyQuestion = db_select.queryListAll("surveyQuestion", "");
+            ArrayList surveyQuestion = db_select.queryListAll("surveyQuestion", "where surveyID='1'");
             ArrayList surveyqType = db_select.queryListAll("surveyqType", "");
             ArrayList survey = db_select.queryListAll("survey", "");
 
@@ -42,7 +42,9 @@
 
 
         %>
-
+        
+     
+        <h4>Survey Demo - Survey ID 1</h4>
         <%                        for (int j = 0; j < surveyqType.size(); j++) {
 
                 SurveyqTypeBean surveyQuestion_val = (SurveyqTypeBean) surveyqType.get(j);
@@ -90,7 +92,7 @@
             %>
             <select  name="<%=surveyQuestion_val.getSqID()%>" >
                 <%
-                    for (int k = surveyQuestion_val.getMinMark(); k < surveyQuestion_val.getMaxMark(); k++) {
+                    for (int k = surveyQuestion_val.getMinMark(); k <= surveyQuestion_val.getMaxMark(); k++) {
                 %>
                 <option value="<%=k%>"><%=k%></option>
                 <%                    }
@@ -107,7 +109,7 @@
 
             %>
             <br><br>
-            <input type="submit" value="Submit">           
+         
         </form>
     </body>
 </html>

@@ -24,7 +24,7 @@
         %>
 
 
-
+        <h4>Insert Budget : Activity ID -  <%=request.getParameter("activities_id")%> </h4>
         <form method="post" action="insertServlet">
             <input type="hidden" name="activities_id" value="<%=request.getParameter("activities_id")%>">
             <input type="hidden" name="table_type" value="activityBudget">
@@ -35,11 +35,11 @@
 
 
                 <tr><td>ActivitiesID</td><td><%=request.getParameter("activities_id")%></td></tr>
-                <tr><td>ItemName</td><td>   <input type="text" name="itemName"  value=""><br></td></tr>
+                <tr><td>ItemName</td><td>   <input type="text" name="itemName"  value="" ><br></td></tr>
                 <tr><td>ItemType</td><td>  <input type="text" name="itemType"  value=""><br></td></tr>
-                <tr><td>Cost $</td><td> <input type="text" name="cost"  value=""><br></td></tr>
-                <tr><td>Qty</td><td>  <input type="text" name="number"  value=""><br></td></tr>
-                <tr><td>Remark</td><td><input type="text" name="remark"  value=""><br></td></tr>
+                <tr><td>Cost $</td><td> <input type="text" name="cost"  value="" ><br></td></tr>
+                <tr><td>Qty</td><td>  <input type="text" name="number"  value="" ><br></td></tr>
+                <tr><td>Remark</td><td><input type="text" name="remark"  value="" ><br></td></tr>
             </table>
             <input type="submit" value="Update">
             <br>

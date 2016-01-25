@@ -62,7 +62,7 @@
         <%                    String dateInString = act.getDate();
             Date date = sdf.parse(dateInString);
         %>
-        
+        <h4> Update Activity - Activity ID :  <%=act.getActivitiesID()%> </h4>
         <span style="text-align:center"><h1><%= act.getName()+"   "%><a href="deleteServlet?table_type=activities&activities_id=<%=act.getActivitiesID()%>"><i class="fa fa-trash"></i></a></h1></span>
         <br>
         <br>

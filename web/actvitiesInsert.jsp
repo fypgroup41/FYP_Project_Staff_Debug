@@ -36,6 +36,7 @@
                 response.sendRedirect(redirectURL);
             }
         %>
+        <h4> Insert Activity </h4>
         <form method="post" action="insertServlet">
 
             <table  align="center" class="table">
@@ -71,9 +72,9 @@
                         </script>
 
                     </td></tr>
-                <tr><td>Deadline</td><td><input type="text" name="deadline" value="" size="35"></td></tr>
-                <tr><td>Venue</td><td><input type="text" name="venue" value="" size="35"></td></tr>
-                <tr><td>Date</td><td><input type="text" name="date" value="" size="35"></td></tr>
+                <tr><td>Deadline</td><td><input type="text" name="deadline" value="" size="35" placeholder="YYYY-MM-DD HH:mm:ss"></td></tr>
+                <tr><td>Venue</td><td><input type="text" name="venue" value="" size="35" ></td></tr>
+                <tr><td>Date</td><td><input type="text" name="date" value="" size="35" placeholder="YYYY-MM-DD HH:mm:ss"></td></tr>
                 <tr><td>Tag</td><td><input type="text" name="tag" value="" size="35"></td></tr>
                 <tr><td>Description</td><td><textarea name="description" ></textarea></td></tr>
                 <tr><td>Activity Type</td><td>       <select name="activityType">

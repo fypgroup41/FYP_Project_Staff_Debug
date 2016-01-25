@@ -48,7 +48,7 @@
             DB_Select db_select = new DB_Select(dbUrl, dbUser, dbPassword);
             //ArrayList activityBudget = db_select.queryListAll("activityBudget", "activitiesID='" + request.getParameter("actID") + "'");
         %>
-
+        <h4> Update Activity TimeTable - Activity TimeTable ID : <%= request.getParameter("timetable_id")%></h4>
         <%              double budget = 0;
             ArrayList activityTimetable = db_select.queryListAll("activityTimetable", " where activityTimeTableID='" + request.getParameter("timetable_id") + "'");
             for (int j = 0; j < activityTimetable.size(); j++) {
@@ -60,11 +60,11 @@
                 <input type="hidden" name="table_type" value="activityTimetable" >
                 <input type="hidden" name="activityTimeTableID" value="<%=activityTimetable_val.getActivityTimeTableID()%>">
                 <input type="hidden" name="activities_id" value="<%=activityTimetable_val.getActivitiesID()%>">
-                <tr><td>activityTimeTableID</td><td><%=activityTimetable_val.getActivityTimeTableID()%></td></tr>
-                <tr><td>activitiesID</td><td><input type="text" name="activitiesID" value="<%=activityTimetable_val.getActivityTimeTableID()%>"></td></tr>
-                <tr><td>detail</td><td><input type="text" name="detail" value="<%=activityTimetable_val.getDetail()%>"></td></tr>
-                <tr><td>startTime</td><td><input type="text" name="startTime" value="<%=activityTimetable_val.getFinishTime()%>"></td></tr>
-                <tr><td>finish</td><td><input type="text" name="finishTime" value="<%=activityTimetable_val.getStartTime()%>"></td></tr>
+                <tr><td>Activity TimeTable ID</td><td><%=activityTimetable_val.getActivityTimeTableID()%></td></tr>
+                <tr><td>ActivitiesID</td><td><input type="text" name="activitiesID" value="<%=activityTimetable_val.getActivityTimeTableID()%>"></td></tr>
+                <tr><td>Detail</td><td><input type="text" name="detail" value="<%=activityTimetable_val.getDetail()%>"></td></tr>
+                <tr><td>Start Time</td><td><input type="text" name="startTime" value="<%=activityTimetable_val.getFinishTime()%>" placeholder="YYYY-MM-DD HH:mm:ss" ></td></tr>
+                <tr><td>Finish Time</td><td><input type="text" name="finishTime" value="<%=activityTimetable_val.getStartTime()%>" placeholder="YYYY-MM-DD HH:mm:ss"></td></tr>
 
                 </td>
                 </tr>

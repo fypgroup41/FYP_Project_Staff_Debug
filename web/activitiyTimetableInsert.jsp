@@ -50,14 +50,14 @@
 
         %>
 
-
+        <h4> Insert - Activity TimeTable  - Activity ID<%=request.getParameter("activities_id")%>%></h4>
         <form method="post" action="insertServlet">
             <input type="hidden" name="activities_id" value="<%=request.getParameter("activities_id")%>">
             <table border="1">
                 <input type="hidden" name="table_type" value="activityTimetable" >                          
-                <tr><td>detail</td><td><input type="text" name="detail" value=""></td></tr>
-                <tr><td>startTime</td><td><input type="text" name="startTime" value=""></td></tr>
-                <tr><td>finish</td><td><input type="text" name="finishTime" value=""></td></tr>
+                <tr><td>Detail</td><td><input type="text" name="detail" value=""></td></tr>
+                <tr><td>Start Time</td><td><input type="text" name="startTime" value="" placeholder="YYYY-MM-DD HH:mm:ss"></td></tr>
+                <tr><td>Finish Time</td><td><input type="text" name="finishTime" value="" placeholder="YYYY-MM-DD HH:mm:ss"></td></tr>
                 </td>
                 </tr>
             </table>

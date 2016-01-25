@@ -33,7 +33,7 @@
 
 
         %>
-
+        <span><a href="surveyDemo.jsp">Survey Demo</a></span>
         <table border="1">
 
             <%                        ArrayList survey = db_select.queryListAll("survey", "");

@@ -21,6 +21,7 @@
     <body>
         <jsp:include page="/sourceLink.jsp"/>
         <jsp:include page="/header.jsp"/>
+        <h4> Insert Survey  Question - Survey ID : <%=request.getParameter("survey_id")%> </h4>
         <%
             if (session.getAttribute("staffInfo") == null) {
                 String redirectURL = "login.jsp";
