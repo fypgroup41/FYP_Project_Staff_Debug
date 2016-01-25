@@ -89,7 +89,8 @@
         <title>JSP Page</title>
     <body>
         <jsp:include page="/header.jsp"/>
-                <a href="actvitiesInsert.jsp"><i class="fa fa-plus fa-2x"></i></a><table id="example" class="display" width="100%" style="cursor: pointer"></table>
+        <a href="actvitiesInsert.jsp"><i class="fa fa-plus fa-2x"></i></a><a href="record_compare.jsp"><i class="fa fa-filter fa-2x"></i>
+</a><table id="example" class="display" width="100%" style="cursor: pointer"></table>
 
     </body>
 </html>
