@@ -54,11 +54,12 @@ public class InsertServlet extends HttpServlet {
                     if (name != null && districtNo != null && quota != null && targetAgeMax != null && targetAgeMin != null && deadline != null && venue != null && date != null && tag != null && activityType != null) {
 
                         String validID = db_select.getAvailActivitiesID();
-                        String sql = " INSERT INTO `activities` (`activitiesID`, `name`, `districtNo`, `quota`, `remain`, `targetAgeMax`, `targetAgeMin`, `deadline`, `venue`, `date`, `tag`, `staffID`, `description`) VALUES ('" + validID + "', '" + name + "', '" + districtNo + "', '" + quota + "', '" + quota + "', '" + targetAgeMax + "', '" + targetAgeMin + "', '" + deadline + "', '" + venue + "', '" + date + "', '" + tag + "', '" + "10"
+                        String sql = " INSERT INTO `activities` (`activitiesID`, `name`, `districtNo`, `quota`, `remain`, `targetAgeMax`, `targetAgeMin`, `deadline`, `venue`, `date`, `tag`, `staffID`, `description`) VALUES ('" + validID + "', '" + name + "', '" + districtNo + "', '" + quota + "', '" + quota + "', '" + targetAgeMax + "', '" + targetAgeMin + "', '" + deadline + "', '" + venue + "', '" + date + "', '" + tag + "', '" + "1"
                                 + "', '" + description + "')";
                         boolean check1 = db_select.editRecordBySql(sql);
-                        sql = "INSERT INTO `atype_a` (`activityTypeID`, `activitiesID`) VALUES ('" + activityType + "', '" + validID + "')";
-                        boolean check2 = db_select.editRecordBySql(sql);
+
+                        String sql2 = "INSERT INTO `atype_a` (`activityTypeID`, `activitiesID`) VALUES ('" + activityType + "', '" + validID + "')";
+                        boolean check2 = db_select.editRecordBySql(sql2);
 
                         if (check1 == true && check2 == true) {
                             request.setAttribute("status", "Insert Success");
