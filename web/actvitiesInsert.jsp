@@ -55,7 +55,7 @@
                 <tr><td>Quota</td><td><input type="text" name="quota" value="" size="35" min="0"></td></tr>
 
 
-                <tr><td>TargetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="targetAgeMin" value="0" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show">0</span>
+                <tr><td>TargetAgeMin</td><td><input type="range" style="width:auto;display: initial;" name="targetAgeMin" value="0" size="35"  min="3" max="99" onchange="targetAgeMin_show(this.value)"><span id ="targetAgeMin_show">3</span>
                         <script type="text/javascript">
                             function targetAgeMin_show(newValue)
                             {
@@ -65,7 +65,7 @@
 
                     </td></tr>
                 <tr><td>TargetAgeMax</td><td>
-                        <input type="range" style="width:auto;display: initial;" name="targetAgeMax"  value="0"  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show">0</span>
+                        <input type="range" style="width:auto;display: initial;" name="targetAgeMax"  value="0"  size="35" min="3" max="99"  onchange="targetAgeMax_show(this.value)"><span id ="targetAgeMax_show">3</span>
                         <script type="text/javascript">
                             function targetAgeMax_show(newValue)
                             {
