@@ -6,7 +6,7 @@
 package ict.servlet;
 
 import db.bean.ActivitiesBean;
-import db.bean.DistrictBean;
+import db.bean.UserBean;
 import db.handle.DB_Select;
 import java.io.*;
 import java.util.ArrayList;
@@ -16,10 +16,11 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import net.sf.json.*;
 
-public class ActivityJSON extends HttpServlet {
+public class LoginJSON extends HttpServlet {
 
     private DB_Select db_select;
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String dbUser = this.getServletContext().getInitParameter("dbUsername");
         String dbPassword = this.getServletContext().getInitParameter("dbPassword");
@@ -29,30 +30,30 @@ public class ActivityJSON extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            ArrayList activity_aryData = db_select.queryActivitiesBySql("select * from activities where staffID=\"" + request.getParameter("id") + "\"");
-            for (int i = 0; i < activity_aryData.size(); i++) {
-                ActivitiesBean act = (ActivitiesBean) activity_aryData.get(i);
-                ArrayList district_aryData = db_select.queryListAll("district", " where districtID='" + act.getDistrictNo() + "'");
-                DistrictBean district = (DistrictBean) district_aryData.get(0);
-                response.setContentType("text/html;charset=UTF-8");
+
+            ArrayList aryData = db_select.queryListAll("user", " where userName=\"" + request.getParameter("userName") + "\" and password=\"" + request.getParameter("password") + "\"");
+
+            if (!aryData.isEmpty()) {
+                for (int i = 0; i < aryData.size(); i++) {
+                    UserBean user = (UserBean) aryData.get(i);
+                    response.setContentType("text/html;charset=UTF-8");
+                    JSONArray jsonArray = new JSONArray();
+                    jsonArray.add(0, user.getStaffID());
+                    jsonArray.add(1, user.getEmail());
+                    jsonArray.add(2, user.getTel());
+                    jsonArray2.add(jsonArray);
+                }
+            } else {
+                /*  response.setContentType("text/html;charset=UTF-8");
                 JSONArray jsonArray = new JSONArray();
-                jsonArray.add(0, act.getName());
-                jsonArray.add(1, act.getDate());
-                jsonArray.add(2, act.getVenue());
-                jsonArray.add(3, district.getName());
-                jsonArray.add(4, act.getRemain());
-                jsonArray.add(5, act.getTargetAgeMax());
-                jsonArray.add(6, act.getTargetAgeMin());
-                jsonArray.add(7, act.getDeadline());
-                jsonArray.add(8, act.getVenue());
-                jsonArray.add(9, act.getDate());
-                jsonArray.add(10, act.getTag());
-                jsonArray.add(11, act.getStaffID());
-                jsonArray.add(12, act.getDescription());
-                jsonArray2.add(jsonArray);
+                jsonArray.add(0, "null1234");
+                jsonArray.add(1, "null1234");
+                jsonArray.add(2, "null1234");
+                jsonArray2.add(jsonArray);*/
             }
 
             out.println(jsonArray2);
+            
             /*  response.setContentType("application/json");
              request.setCharacterEncoding("UTF-8");
              JSONArray jArray = new JSONArray();
@@ -64,7 +65,7 @@ public class ActivityJSON extends HttpServlet {
              jArray.add(0, arrayObj);
              PrintWriter out = response.getWriter();
              out.print(jArray);*/
-            /*  response.setContentType("text/html;charset=UTF-8");
+ /*  response.setContentType("text/html;charset=UTF-8");
              //      
       
 
@@ -73,7 +74,7 @@ public class ActivityJSON extends HttpServlet {
           
              request.setAttribute("data", data);
              */
-            /*RequestDispatcher rd;
+ /*RequestDispatcher rd;
              rd = getServletContext().getRequestDispatcher("/main.jsp");
              rd.forward(request, response);*/
         } catch (Exception ex) {

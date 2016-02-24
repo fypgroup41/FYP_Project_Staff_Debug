@@ -66,12 +66,11 @@ public class DB_Select {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-
+            return DriverManager.getConnection(url, username, password);
         } catch (ClassNotFoundException ex) {
             //  Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        return DriverManager.getConnection(url, username, password);
+        return null;
     }
 
     public ArrayList getList(ResultSet rs, String bean) throws SQLException {
@@ -828,6 +827,18 @@ public class DB_Select {
                 while (rs.next()) {
                     SurveyBean survey = new SurveyBean(rs.getString(1), rs.getString(2));
                     list.add(survey);
+                }
+                pStmnt.close();
+
+            }
+
+            if (table.equals("user")) {
+                String preQueryStatement = "SELECT* FROM User " + condition;
+                pStmnt = cnnct.prepareStatement(preQueryStatement);
+                rs = pStmnt.executeQuery();
+                while (rs.next()) {
+                    UserBean user = new UserBean(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12), rs.getInt(13));
+                    list.add(user);
                 }
                 pStmnt.close();
 

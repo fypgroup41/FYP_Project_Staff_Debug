@@ -4,17 +4,22 @@
     
     <context-param>
         <param-name>dbUrl</param-name>
-        <param-value>jdbc:mysql://1130l.ddns.net/mydb</param-value>
-    </context-param>    
-
+        <param-value>jdbc:mysql://localhost:3306/mydb</param-value>
+    </context-param>
     <context-param>
         <param-name>dbUsername</param-name>
-        <param-value>FYP</param-value>
+        <param-value>root</param-value>
     </context-param>
-
     <context-param>
         <param-name>dbPassword</param-name>
-        <param-value>FYP123456789</param-value>
+        <param-value/>
+    </context-param>
+    <context-param> 
+        <description>Location to store uploaded file</description> 
+        <param-name>file-upload</param-name> 
+        <param-value>
+            d://
+        </param-value> 
     </context-param>
 
     <session-config>
@@ -47,6 +52,18 @@
         <servlet-name>activity_json</servlet-name>
         <url-pattern>/activity_json</url-pattern>
     </servlet-mapping>
+    
+    
+     <servlet>
+        <servlet-name>login_json</servlet-name>
+        <servlet-class>ict.servlet.LoginJSON</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>login_json</servlet-name>
+        <url-pattern>/login_json</url-pattern>
+    </servlet-mapping>
+    
+    
     <servlet>
         <servlet-name>updateServlet</servlet-name>
         <servlet-class>ict.servlet.UpdateServlet</servlet-class>
@@ -88,4 +105,5 @@
         <servlet-name>login</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    
 </web-app>

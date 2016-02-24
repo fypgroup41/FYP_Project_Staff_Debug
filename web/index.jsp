@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="java.io.Writer"%>
 <%@page import="db.bean.ActivitiesBean"%>
 <%@page import="db.bean.AdminBean"%>
@@ -19,11 +21,26 @@
     </head>
     <body>
         <%
-            if (session.getAttribute("staffInfo") == null) {
-                String redirectURL = "login.jsp";
-                response.sendRedirect(redirectURL);
-            } else {
-                String redirectURL = "activities.jsp";
+
+            try {
+                /*    System.setProperty("jdbc.drivers", "com.mysql.jdbc.Driver");
+                 Class.forName("com.mysql.jdbc.Driver");
+                 String dbUser = this.getServletContext().getInitParameter("dbUsername");
+                 String dbPassword = this.getServletContext().getInitParameter("dbPassword");
+                 String dbUrl = this.getServletContext().getInitParameter("dbUrl");
+                 Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);*/
+                if (session.getAttribute("staffInfo") == null) {
+                    String redirectURL = "login.jsp";
+                    response.sendRedirect(redirectURL);
+                } else {
+                    String redirectURL = "activities.jsp";
+                    response.sendRedirect(redirectURL);
+                }
+           /* } catch (ClassNotFoundException ex) {
+                String redirectURL = "ServerMaintain.jsp";
+                response.sendRedirect(redirectURL);*/
+            } catch (Exception ex) {
+                String redirectURL = "ServerMaintain.jsp";
                 response.sendRedirect(redirectURL);
             }
         %>

@@ -23,7 +23,7 @@ public class InsertServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
 
-            String table_type = null;
+            String table_type = "activities";
             table_type = request.getParameter("table_type");
 
             switch (table_type) {
